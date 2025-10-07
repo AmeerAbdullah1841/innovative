@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function VilepTechnologyPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       {/* Background */}
@@ -16,13 +18,13 @@ export default function VilepTechnologyPage() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         {/* Breadcrumbs */}
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <Link href="/product-center" className="hover:underline">Product Center</Link>
+          <Link href="/product-center" className="hover:underline">{t("nav_product_center")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">Product development</span>
+          <span className="opacity-80">{t("pc_cat_product_development")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">ViLEP technology</span>
+          <span className="text-white">{t("pc_prod_vilep_technology")}</span>
         </div>
 
         {/* Hero */}
@@ -37,15 +39,10 @@ export default function VilepTechnologyPage() {
             />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">ViLEP technology</h1>
-            <p className="text-gray-300 leading-relaxed">
-              ViLEP&apos;s vibrating PTFE membrane technology leverages hydrophilic PTFE materials and
-              mechanical reciprocating motion to reduce energy consumption and fouling while
-              improving lifespan. The first section mirrors the reference layout with an image and
-              description.
-            </p>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">{t("pc_prod_vilep_technology")}</h1>
+            <p className="text-gray-300 leading-relaxed">{t("vt_intro")}</p>
             <div className="mt-6">
-              <Link href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-sm hover:bg-gray-700 transition-colors">Contact Us</Link>
+              <Link href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-sm hover:bg-gray-700 transition-colors">{t("contact_us")}</Link>
             </div>
           </div>
         </div>
@@ -54,7 +51,7 @@ export default function VilepTechnologyPage() {
         <section className="mt-12 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Development of membrane</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("dev_of_membrane")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <div className="relative w-full max-w-xl mx-auto" style={{ aspectRatio: "16 / 9" }}>
@@ -74,18 +71,13 @@ export default function VilepTechnologyPage() {
         <section className="mt-12 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">ViLEP membrane fouling control</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("vilep_fouling_control")}</h2>
           </div>
           {/* Aerated membrane bioreactor (top) */}
           <div className="p-6">
-            <div className="inline-flex items-center rounded bg-gray-900 text-white text-xs font-medium px-3 py-1 mb-4">Aerated membrane bioreactor</div>
+            <div className="inline-flex items-center rounded bg-gray-900 text-white text-xs font-medium px-3 py-1 mb-4">{t("aerated_mbr")}</div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              <div className="text-gray-700 leading-relaxed order-2 lg:order-1">
-                Traditional aerated membrane bioreactors use continuous or pulsed aeration for
-                municipal and industrial applications. Energy is consumed to deliver air through the
-                tank, and concentration polarization at the membrane surface can still occur,
-                requiring higher operating energy and more frequent cleaning cycles.
-              </div>
+              <div className="text-gray-700 leading-relaxed order-2 lg:order-1">{t("vt_top_text")}</div>
               <div className="order-1 lg:order-2 w-full max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
                   <Image
@@ -111,33 +103,17 @@ export default function VilepTechnologyPage() {
 
           {/* ViLEP technology (bottom) */}
           <div className="px-6 pb-6 pt-0">
-            <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-3 py-1 mb-4">ViLEP technology</div>
+            <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-3 py-1 mb-4">{t("pc_prod_vilep_technology")}</div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              <div className="text-gray-700 leading-relaxed order-2 lg:order-1">
-                ViLEP replaces blower aeration with mechanical reciprocating motion. Relative motion
-                between membrane filaments and mixed liquor gently scrubs the surface and limits
-                polarization, effectively controlling fouling while cutting energy consumption and
-                improving denitrification performance.
-              </div>
-              <div className="order-1 lg:order-2 w-full max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
-                  <Image
-                    src='https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/55d55873-119e-4169-9c14-e2043d59d55d.gif'
-                    alt='ViLEP membrane fouling control (animation)'
-                    fill
-                    unoptimized
-                    className="object-contain"
-                  />
-                </div>
-                <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
-                  <Image
-                  src='https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/87d8d3ad-e664-400d-92c4-e881f52b2953.png'
-                    alt='ViLEP membrane fouling control (diagram)'
-                    fill
-                    unoptimized
-                    className="object-contain"
-                  />
-                </div>
+              <div className="text-gray-700 leading-relaxed order-2 lg:order-1">{t("vt_bottom_text")}</div>
+              <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
+                <Image
+                  src='https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/55d55873-119e-4169-9c14-e2043d59d55d.gif'
+                  alt='ViLEP membrane fouling control (animation)'
+                  fill
+                  unoptimized
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
@@ -147,24 +123,24 @@ export default function VilepTechnologyPage() {
         <section className="mt-12 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">ViLEP technology advantages</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("vilep_advantages")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
+            {[ 
               {
-                title: "Denitrification efficiency is greatly improved",
+                title: t('vt_adv_1_title'),
                 img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/c4e6314e-03b4-4dd8-b21c-a793db03cd90.gif',
-                desc: 'Two-stage process reduces dissolved oxygen carryover, enhancing anoxic denitrification and carbon source utilization.'
+                desc: t('vt_adv_1_desc')
               },
               {
-                title: "Save space and peripheral equipment",
+                title: t('vt_adv_2_title'),
                 img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/435cf448-b2d8-43f3-a3ca-c0856dc303b9.gif',
-                desc: 'Mechanical reciprocation eliminates large blowers and reduces return pumps, enabling compact layouts.'
+                desc: t('vt_adv_2_desc')
               },
               {
-                title: "Wide range of adaptation scenarios",
+                title: t('vt_adv_3_title'),
                 img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/c84e5e8f-0942-4ca3-92a4-88387dbf874e.gif',
-                desc: 'Stable membrane performance applies to municipal, industrial, and high-load shock conditions.'
+                desc: t('vt_adv_3_desc')
               },
             ].map((card) => (
               <div key={card.title} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -183,21 +159,6 @@ export default function VilepTechnologyPage() {
                 </div>
               </div>
             ))}
-          </div>
-          {/* Extra images only under advantages */}
-          <div className="px-6 pb-8">
-            <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-3 py-1 mb-4">Energy consumption reduced by 85%+</div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/54a7abff-6bab-4074-9d8c-45497a18dfc2.png',
-                 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/0a72d50b-d358-4be4-be77-fd91bf16010e.png',
-                  'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/3178e1d9-5996-43a9-b512-77a03f597e7b.png'
-                ].map((src, i) => (
-                <div key={i} className="relative w-full " style={{ aspectRatio: '16 / 9' }}>
-                  <Image src={src} alt={`advantage ${i + 1}`} fill unoptimized className="object-contain" />
-                </div>
-              ))}
-            </div>
           </div>
         </section>
       </div>

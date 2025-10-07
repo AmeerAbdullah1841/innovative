@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function SumitomoElectricPoreflonFilmPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       {/* Background */}
@@ -22,11 +24,11 @@ export default function SumitomoElectricPoreflonFilmPage() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         {/* Breadcrumbs */}
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <Link href="/product-center" className="hover:underline">Product Center</Link>
+          <Link href="/product-center" className="hover:underline">{t("nav_product_center")}</Link>
           <span className="mx-2">›</span>
-          <span className="text-white">Sumitomo Electric POREFLON film</span>
+          <span className="text-white">{t("pc_prod_poreflon")}</span>
         </div>
 
         {/* Hero Section (matches the attached reference layout) */}
@@ -43,15 +45,11 @@ export default function SumitomoElectricPoreflonFilmPage() {
             </div>
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
-              Sumitomo Electric POREFLON film
-            </h1>
-            <p className="text-gray-700 leading-relaxed">
-              As early as 1962, Sumitomo Electric Industries, Ltd. obtained the patent for the extension of PTFE polytetrafluoroethylene product technology. As a strategic partner of Sumitomo Electric Industries, Ltd.&apos;s environmental business, Suko Environmental Protection has innovatively applied Sumitomo Electric&apos;s POREFLON membrane to the Chinese water treatment market. At the same time, in combination with the needs of different application scenarios, Suko cooperates with domestic and foreign universities and research institutions to develop technical solutions for application scenarios in sub-sectors such as leachate, municipal engineering, steel, coal chemical industry, electronic electroplating, oil fields, water supply, and seawater desalination.
-            </p>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">{t("pc_prod_poreflon")}</h1>
+            <p className="text-gray-700 leading-relaxed">{t("poreflon_intro")}</p>
             <div className="mt-6">
               <Link href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-white text-sm hover:bg-gray-700 transition-colors">
-                Contact Us
+                {t("contact_us")}
               </Link>
             </div>
           </div>
@@ -61,14 +59,14 @@ export default function SumitomoElectricPoreflonFilmPage() {
         <section className="mt-12 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Material</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("material")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'High water flux and stable water quality', img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/5f70ae32-e7be-4e62-8c53-7dc88b17ced9.gif_366xaf.gif', desc: 'High porosity PTFE material with three-dimensional mesh structure.' },
-              { title: 'High stain resistance', img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6ebaced0-c7a1-4b81-b13b-30b40be3b388.gif_366xaf.gif', desc: 'Excellent hydrophilicity and unique 3D structure reduce fouling.' },
-              { title: 'High durability', img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/7df397e7-9c37-461b-8b25-3faf382e0a91.gif_366xaf.gif', desc: 'Long service life verified by strength and vibration tests.' },
-              { title: 'High chemical resistance', img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/5cf61813-f00f-455d-a910-4edfae5cd4de.gif_366xaf.gif', desc: 'Alkali and salt resistance enable broad application scenarios.' }
+              { title: t('m_high_flux_title'), img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/5f70ae32-e7be-4e62-8c53-7dc88b17ced9.gif_366xaf.gif', desc: t('m_high_flux_desc') },
+              { title: t('m_stain_res_title'), img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6ebaced0-c7a1-4b81-b13b-30b40be3b388.gif_366xaf.gif', desc: t('m_stain_res_desc') },
+              { title: t('m_dur_title'), img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/7df397e7-9c37-461b-8b25-3faf382e0a91.gif_366xaf.gif', desc: t('m_dur_desc') },
+              { title: t('m_chem_title'), img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/5cf61813-f00f-455d-a910-4edfae5cd4de.gif_366xaf.gif', desc: t('m_chem_desc') }
             ].map((card, idx) => (
               <div key={idx} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div className="relative w-full" style={{aspectRatio: '16 / 9'}}>
@@ -87,7 +85,7 @@ export default function SumitomoElectricPoreflonFilmPage() {
         <section className="mt-12 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Product</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("product")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="relative w-full max-w-sm mx-auto" style={{aspectRatio: '16 / 9'}}>
@@ -100,16 +98,14 @@ export default function SumitomoElectricPoreflonFilmPage() {
               />
             </div>
             <div className="overflow-auto">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
-                Sumitomo Electric POREFLON column membrane module
-              </h3>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">{t("poreflon_column")}</h3>
               <table className="min-w-full text-sm border border-gray-400">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Model</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Material</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Dimensions (mm)</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Effective membrane area (m²)</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_model")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_material")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_dimensions")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_area")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -136,20 +132,18 @@ export default function SumitomoElectricPoreflonFilmPage() {
         <section className="mt-12 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Product</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("product")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <div className="overflow-auto order-2 lg:order-1">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
-                Sumitomo Electric POREFLON external pressure membrane module
-              </h3>
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">{t("poreflon_external")}</h3>
               <table className="min-w-full text-sm border border-gray-400">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Product Model</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Material</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Dimensions (mm)</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Effective membrane area (m²)</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_model")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_material")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_dimensions")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("th_area")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">

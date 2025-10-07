@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function DrinkingWaterPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -11,30 +13,29 @@ export default function DrinkingWaterPage() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">Solution</span>
+          <span className="opacity-80">{t("sol_breadcrumb")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">High‑quality drinking water</span>
+          <span className="text-white">{t("sol_drink_title")}</span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-black rounded-2xl p-6 shadow-xl">
           <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
             <Image src="/drink.jpg" alt="Drinking water" fill unoptimized className="object-contain" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">High‑quality Drinking Water</h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">{t("sol_drink_title")}</h1>
           </div>
         </div>
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900"> 
-            High‑quality Drinking Water Technology</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_drink_h2")}</h2>
           </div>
           <div className="p-6 space-y-4">
             {[
               {t:"",
-                d:"We launched the 'Shuiyuejie AQE' system, a PTFE membrane-based system designed to protect beautiful rural areas with exceptional cleanliness. Utilizing the world's leading Poreflon membrane (PTFE), the system features a highly integrated, modular, prefabricated design, enabling intelligent control and operation. It is suitable for water bodies with a wide range of hardness and turbidity. Applications include disinfectant preparation and dosing in urban waterworks, rural drinking water systems, remote mountainous areas, boat moorings, hotels, and schools, as well as rainwater and domestic wastewater reuse"}
+                d:t("sol_drink_p1")}
             ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
                 <div className="min-w-[160px] bg-black text-white text-sm font-semibold px-4 py-3 flex items-center justify-center text-center whitespace-pre-line">
@@ -61,13 +62,13 @@ export default function DrinkingWaterPage() {
             
           </div>
           <p className="ml-50 text-sm text-gray-700">
-          <b >Note:</b> The process flow can be customized according to the existing water quality conditions to achieve the best effluent quality. </p>
+          <b >{t("sol_note")}</b> {t("sol_note_text")} </p>
         </section>
         
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-3">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Technological advantages</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t('sol_drink_adv_heading')}</h2>
           </div>
           <div className="p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-9">
@@ -78,11 +79,11 @@ export default function DrinkingWaterPage() {
                     <div className="w-6 h-4 bg-black rounded-sm transform rotate-90"></div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Equipment advantages</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('sol_drink_equipment_t')}</h3>
                 <ul className="text-sm text-gray-700 space-y-1 text-left">
-                  <li>• Standardized mass production</li>
-                  <li>• Modular installation</li>
-                  <li>• Reduced land area</li>
+                  <li>• {t('sol_drink_equipment_b1')}</li>
+                  <li>• {t('sol_drink_equipment_b2')}</li>
+                  <li>• {t('sol_drink_equipment_b3')}</li>
                 </ul>
               </div>
 
@@ -93,9 +94,9 @@ export default function DrinkingWaterPage() {
                     <div className="w-4 h-4 bg-black rounded-sm transform rotate-45"></div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Process advantages</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('sol_drink_process_t')}</h3>
                 <ul className="text-sm text-gray-700 space-y-1 text-left">
-                  <li>• Micro-flocculation: Reduce the amount of chemical agents added, reduce operating costs, and optimize treatment effects</li>
+                  <li>• {t('sol_drink_process_b1')}</li>
                 </ul>
               </div>
 
@@ -109,12 +110,12 @@ export default function DrinkingWaterPage() {
                     </div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">High-efficiency filtration</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('sol_drink_filter_t')}</h3>
                 <ul className="text-sm text-gray-700 space-y-1 text-left">
-                  <li>• Can realize gravity filtration and save energy</li>
-                  <li>• Good hydrophilicity, high-throughput and stable operation</li>
-                  <li>• The membrane layer is ultrafiltration, and the effluent water quality is stable</li>
-                  <li>• Strong anti-pollution ability and good recovery performance</li>
+                  <li>• {t('sol_drink_filter_b1')}</li>
+                  <li>• {t('sol_drink_filter_b2')}</li>
+                  <li>• {t('sol_drink_filter_b3')}</li>
+                  <li>• {t('sol_drink_filter_b4')}</li>
                 </ul>
               </div>
 
@@ -125,12 +126,12 @@ export default function DrinkingWaterPage() {
                     <div className="w-6 h-6 bg-black rounded-sm transform rotate-45"></div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Performance advantages</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('sol_drink_perf_t')}</h3>
                 <ul className="text-sm text-gray-700 space-y-1 text-left">
-                  <li>• Intelligent control</li>
-                  <li>• Intelligent backwashing, water making and dosing</li>
-                  <li>• Remote control of IoT mode</li>
-                  <li>• View, manage, and control equipment</li>
+                  <li>• {t('sol_drink_perf_b1')}</li>
+                  <li>• {t('sol_drink_perf_b2')}</li>
+                  <li>• {t('sol_drink_perf_b3')}</li>
+                  <li>• {t('sol_drink_perf_b4')}</li>
                 </ul>
               </div>
             </div>
@@ -140,10 +141,10 @@ export default function DrinkingWaterPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="ml-90 h-6 w-1.5 bg-black rounded" />
-            <h2 className=" text-lg font-semibold text-gray-900">Adaptive product series</h2>
+            <h2 className=" text-lg font-semibold text-gray-900">{t("sol_adaptive_series")}</h2>
           </div>
           <div className="p-2">
-            <p className="ml-50 text-gray-700">VILEP-1500 / 2000 (Submerged Ultrafiltration SMF / External Pressure Ultrafiltration)</p>
+            <p className="ml-50 text-gray-700">{t('sol_drink_product_desc')}</p>
           </div>
         </section>
       </div>

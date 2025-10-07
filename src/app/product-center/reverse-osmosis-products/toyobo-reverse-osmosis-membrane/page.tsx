@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function ReverseOsmosisPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -11,22 +13,21 @@ export default function ReverseOsmosisPage() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <Link href="/product-center" className="hover:underline">Product Center</Link>
+          <Link href="/product-center" className="hover:underline">{t("nav_product_center")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">Reverse osmosis products</span>
+          <span className="opacity-80">{t("pc_cat_ro")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">Toyobo reverse osmosis membrane</span>
+          <span className="text-white">{t("pc_prod_toyobo_ro")}</span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-black backdrop-blur-sm rounded-2xl p-6 shadow-xl">
           <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
             <Image src="https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/afef06a4-e83d-4346-af44-c6384e4cefad.png_1180xaf.png" alt="Reverse Osmosis" fill unoptimized className="object-contain" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-white mb-4">Toyobo reverse osmosis membrane</h1>
-            <p className="text-gray-300 leading-relaxed">
-            Common brackish water, reuse, desalination, water desalination</p>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-white mb-4">{t("pc_prod_toyobo_ro")}</h1>
+            <p className="text-gray-300 leading-relaxed">{t("toyobo_desc")}</p>
           </div>
         </div>
 
@@ -34,7 +35,7 @@ export default function ReverseOsmosisPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-2 py-1 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Structure and Components</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("structure_components")}</h2>
           </div>
           <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
@@ -54,7 +55,7 @@ export default function ReverseOsmosisPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Product Specifications</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("product_specs")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div className="relative w-full max-w-md mx-auto" style={{ aspectRatio: '2/ 1' }}>
@@ -67,15 +68,15 @@ export default function ReverseOsmosisPage() {
               <table className="min-w-full text-sm border border-gray-400">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Membrane material</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Membrane element outer diameter</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Membrane element length</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Membrane area (m²)</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("mem_material")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("mem_od")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("mem_len")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("mem_area")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {[
-                    { material: 'Cellulose triacetate (CTA)', od: '280 mm', len: '1.4 m', area: '600' },
+                    { material: t('toyobo_row_material_cta'), od: '280 mm', len: '1.4 m', area: '600' },
                   ].map((row, i) => (
                     <tr key={i} className="odd:bg-gray-50">
                       <td className="px-3 py-2 text-gray-800 border border-gray-400">{row.material}</td>
@@ -92,16 +93,16 @@ export default function ReverseOsmosisPage() {
               <table className="min-w-full text-sm border border-gray-400">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">pH</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400"> Temperature</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400"> SDI</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400"> Preprocessing</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_ph")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_temperature")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_sdi")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_preprocessing")}</th>
 
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {[
-                    { tds: '3-8', flux: '5-40℃' , sd: '≤4' , pre: 'The water quality should be guaranteed to be at the target concentration' },
+                    { tds: '3-8', flux: '5-40℃' , sd: '≤4' , pre: t('toyobo_pre_water_quality') },
                   ].map((row, i) => (
                     <tr key={i} className="odd:bg-gray-50">
                       <td className="px-3 py-2 text-gray-800 border border-gray-400">{row.tds}</td>
@@ -118,8 +119,8 @@ export default function ReverseOsmosisPage() {
               <table className="min-w-full text-sm border border-gray-400">
                 <thead>
                   <tr className="bg-black text-white">
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Concentration under various conditions (mg/L) (supply → outlet)</th>
-                    <th className="px-3 py-2 text-left font-medium border border-gray-400">Water permeability (L/㎡/hr)</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_concentration")}</th>
+                    <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_perm")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -149,32 +150,32 @@ export default function ReverseOsmosisPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Product Parameters</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("product_params")}</h2>
           </div>
           <div className="p-6 overflow-auto">
             <table className="min-w-full text-sm border border-gray-400">
               <thead>
                 <tr className="bg-black text-white">
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Type </th>
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Model</th>
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Diameter (Inch)</th>
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Membrane surface area ft²(㎡) </th>
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Feed spacer thickness (Mil)</th>
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Permeate flow GPD(m³/d) </th>
-                  <th className="px-3 py-2 text-left font-medium border border-gray-400">Salt rejection rate %</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_type")}</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_model")}</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_diameter")}</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_area_ft")}</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_spacer")}</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_flow")}</th>
+                  <th className="px-3 py-2 text-left font-medium border border-gray-400">{t("col_reject")}</th>
 
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {[
-                  { type: 'Standard', model: 'SB81S-1', inch: '8', area: '400 (37.2)', spacer: '28', flow: '10500 (39.7)', rej: '99.6' },
-                  { type: 'High-throughput', model: 'SB81S-4', inch: '8', area: '400 (37.2)', spacer: '28', flow: '25000 (94.7)', rej: '99.5' },
-                  { type: 'High-throughput', model: 'SB41SHF', inch: '4', area: '100 (9.3)', spacer: '28', flow: '3120 (11.8)', rej: '99.5' },
-                  { type: 'High Throughput & Ultra-Low Pressure', model: 'SB8011HF', inch: '8', area: '1000 (93)', spacer: '28', flow: '13200 (49.3)', rej: '99.5' },
-                  { type: 'High Throughput & Ultra-Low Pressure', model: 'SB401HF', inch: '4', area: '100 (9.3)', spacer: '28', flow: '3120 (11.8)', rej: '99.5' },
-                  { type: 'Anti-pollution type', model: 'SL615', inch: '6', area: '365 (33.9)', spacer: '34', flow: '2300 (8.7)', rej: '99.7' },
-                  { type: 'Anti-pollution type', model: 'SL815', inch: '8', area: '780 (72.3)', spacer: '34', flow: '3800 (14.4)', rej: '99.7' },
-                  { type: 'High throughput & anti-fouling', model: 'SL41SHF-2', inch: '4', area: '850 (79)', spacer: '34', flow: '2500 (9.7)', rej: '99.6' },
+                  { type: t('toyobo_type_standard'), model: 'SB81S-1', inch: '8', area: '400 (37.2)', spacer: '28', flow: '10500 (39.7)', rej: '99.6' },
+                  { type: t('toyobo_type_high_throughput'), model: 'SB81S-4', inch: '8', area: '400 (37.2)', spacer: '28', flow: '25000 (94.7)', rej: '99.5' },
+                  { type: t('toyobo_type_high_throughput'), model: 'SB41SHF', inch: '4', area: '100 (9.3)', spacer: '28', flow: '3120 (11.8)', rej: '99.5' },
+                  { type: t('toyobo_type_high_throughput_ultra_low_pressure'), model: 'SB8011HF', inch: '8', area: '1000 (93)', spacer: '28', flow: '13200 (49.3)', rej: '99.5' },
+                  { type: t('toyobo_type_high_throughput_ultra_low_pressure'), model: 'SB401HF', inch: '4', area: '100 (9.3)', spacer: '28', flow: '3120 (11.8)', rej: '99.5' },
+                  { type: t('toyobo_type_anti_pollution'), model: 'SL615', inch: '6', area: '365 (33.9)', spacer: '34', flow: '2300 (8.7)', rej: '99.7' },
+                  { type: t('toyobo_type_anti_pollution'), model: 'SL815', inch: '8', area: '780 (72.3)', spacer: '34', flow: '3800 (14.4)', rej: '99.7' },
+                  { type: t('toyobo_type_high_throughput_anti_fouling'), model: 'SL41SHF-2', inch: '4', area: '850 (79)', spacer: '34', flow: '2500 (9.7)', rej: '99.6' },
                 ].map((row, i) => (
                   <tr key={i} className="odd:bg-gray-50">
                     <td className="px-3 py-2 text-gray-800 border border-gray-400">{row.type}</td>

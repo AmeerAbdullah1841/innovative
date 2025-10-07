@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function Vilep10Page() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -12,13 +14,13 @@ export default function Vilep10Page() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <Link href="/product-center" className="hover:underline">Product Center</Link>
+          <Link href="/product-center" className="hover:underline">{t("nav_product_center")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">MBR products</span>
+          <span className="opacity-80">{t("pc_cat_mbr")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">ViLEP-100</span>
+          <span className="text-white">{t("pc_prod_vilep_100")}</span>
         </div>
         {/* Hero */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-black rounded-2xl p-6 shadow-xl">
@@ -26,23 +28,23 @@ export default function Vilep10Page() {
             <Image src="https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/a3f990b3-3413-4e40-9c00-37f9fac72470.png_1180xaf.png" alt="ViLEP-10" fill unoptimized className="object-contain" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">ViLEP-100</h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">{t("pc_prod_vilep_100")}</h1>
             {/* Applicable Scenarios */}
-            <div className="inline-flex items-center rounded bg-white text-black text-sm md:text-base font-medium px-4 py-1.5">Applicable Scenarios</div>
+            <div className="inline-flex items-center rounded bg-white text-black text-sm md:text-base font-medium px-4 py-1.5">{t("label_applicable")}</div>
             <ul className="mt-2 list-disc pl-5 text-sm text-gray-200 space-y-2">
-              <li>Landfill leachate MBR; high‑concentration and difficult‑to‑treat wastewater</li>
-              <li>Separation and recovery of emulsified oils, cutting fluids, titanium dioxide</li>
-              <li>Stable production and compliance; oil resistance and pollution resistance</li>
-              <li>Easy cleaning and maintenance; versatile application scenarios</li>
+              <li>{t("vilep100_b1")}</li>
+              <li>{t("vilep100_b2")}</li>
+              <li>{t("vilep100_b3")}</li>
+              <li>{t("vilep100_b4")}</li>
             </ul>
             {/* Design flux */}
-            <div className="mt-4 inline-flex items-center rounded bg-white text-black text-sm md:text-base font-medium px-4 py-1.5">Design flux</div>
+            <div className="mt-4 inline-flex items-center rounded bg-white text-black text-sm md:text-base font-medium px-4 py-1.5">{t("label_design_flux")}</div>
             <ul className="mt-2 list-disc pl-5 text-sm text-gray-200 space-y-2">
-              <li>Operating flux 5–15 LMH</li>
-              <li>Sludge concentration 15–30 g/L</li>
+              <li>{t("vilep100_flux_b1")}</li>
+              <li>{t("vilep100_flux_b2")}</li>
             </ul>
             <div className="mt-4">
-              <Link href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-sm hover:bg-gray-700">Contact Us</Link>
+              <Link href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-sm hover:bg-gray-700">{t("contact_us")}</Link>
             </div>
           </div>
         </div>
@@ -51,12 +53,12 @@ export default function Vilep10Page() {
         <section className="mt-6 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-4 py-2 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Product Introduction</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("label_product_intro")}</h2>
           </div>
           <div className="p-4 space-y-6">
             {[
-              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/c64d6969-2875-40ca-b646-a939aa727109.webp_640xaf.webp', title: 'ViLEP-100 reciprocating membrane product', desc: 'Standard sizes optional; L*W*H can be flexibly adapted per project.' },
-              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/06e84f67-14fe-4be9-b201-74422c738722.png', title: 'ViLEP-100 aeration membrane products', desc: 'Integrated suspension structure and slide module; standardized installation.' }
+              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/c64d6969-2875-40ca-b646-a939aa727109.webp_640xaf.webp', title: t('vilep100_title_1'), desc: t('vilep100_desc_1') },
+              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/06e84f67-14fe-4be9-b201-74422c738722.png', title: t('vilep100_title_2'), desc: t('vilep100_desc_2') }
             ].map((block, idx) => (
               <div key={idx} className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
                 <div className="relative w-full max-w-sm mx-auto" style={{ aspectRatio: "4 / 3" }}>
@@ -75,12 +77,12 @@ export default function Vilep10Page() {
         <section className="mt-6 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-4 py-2 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Membrane Module</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("label_membrane_module")}</h2>
           </div>
           <div className="p-4 space-y-6">
             {[
-              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/8ef7dcdf-2787-41ad-8e20-c6b3c166209c.webp', title: 'ViLEP-100 Series R/H', desc: 'Ultrafiltration membrane with exceptional fouling resistance; highly integrated module shortens on‑site installation and reduces labor cost.' },
-              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/3c1fb05c-d1ca-4a7d-b598-9ab91f3400bc.webp', title: 'ViLEP-100 Series A/F', desc: 'Stable operation, long life, and low energy consumption for diverse scenarios.' }
+              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/8ef7dcdf-2787-41ad-8e20-c6b3c166209c.webp', title: t('vilep100_mm1_title'), desc: t('vilep100_mm1_desc') },
+              { img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/3c1fb05c-d1ca-4a7d-b598-9ab91f3400bc.webp', title: t('vilep100_mm2_title'), desc: t('vilep100_mm2_desc') }
             ].map((p, idx) => (
               <div key={idx} className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
                 <div className="relative w-full max-w-sm mx-auto" style={{ aspectRatio: '16 / 9' }}>

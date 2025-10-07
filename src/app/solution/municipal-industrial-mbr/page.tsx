@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function MunicipalIndustrialMBRPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -11,11 +13,11 @@ export default function MunicipalIndustrialMBRPage() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">Solution</span>
+          <span className="opacity-80">{t("sol_breadcrumb")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">Municipal & industrial MBR</span>
+          <span className="text-white">{t("sol_mbr_title")}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-black rounded-2xl p-6 shadow-xl">
@@ -23,19 +25,18 @@ export default function MunicipalIndustrialMBRPage() {
             <Image src="https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6ee7a5cb-15ab-4c87-a960-fbb641c4a066.png" alt="Municipal & industrial MBR" fill unoptimized className="object-contain" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-2xl font-semibold text-gray-200 mb-4">Municipal & Industrial Wastewater Low Carbon MBR Technology Package</h1>
+            <h1 className="text-2xl sm:text-2xl font-semibold text-gray-200 mb-4">{t("sol_mbr_title")}</h1>
           </div>
         </div>
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900"> 
-            Municipal & Industrial Wastewater Low Carbon MBR Technology Package</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_mbr_title")}</h2>
           </div>
           <div className="p-6 space-y-4">
             {[
               {t:"",
-                d:"Currently, MBR technology is widely used in the water treatment industry, but it still has pain points such as short service life, high operating energy consumption, difficult cleaning and maintenance, and unstable denitrification and phosphorus removal. These problems not only trouble customers but also hinder the low-carbon development of the membrane industry. In response, Suke Environmental Protection has developed a low-carbon MBR technology package for municipal and industrial wastewater, creating a product with high operating flux, long service life, low operating energy consumption, long cleaning cycles, low user barriers, good user experience, high denitrification efficiency, and a wide range of adaptability scenarios, allowing customers to truly save money, worry, and effort."}
+                d:t("sol_mbr_p1")}
             ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
                 <div className="min-w-[160px] bg-black text-white text-sm font-semibold px-4 py-3 flex items-center justify-center text-center whitespace-pre-line">
@@ -55,22 +56,14 @@ export default function MunicipalIndustrialMBRPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Common processes and pain points</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_common_pp")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
             {[
-              {title:"Pain point 1: Short membrance service life",
-                desc:"The main factors affecting the service life of MBR membrane products include: severe membrane pollution and flux attenuation, aging of membrane material and loss of hydrophilicity, membrane filament breakage or peeling damage; the use environment, operation and maintenance level, design parameters, etc. will also affect the service life of membrane products; in municipal sewage, the service life of MBR membrane has been greatly improved, but the service life cannot meet the use requirements, which is a key factor determining the development of MBR technology."
-              },
-              {title:"Pain point 2: High energy consumption",
-                desc:"The power consumption of the MBR process mainly includes membrane aeration and purge, biochemical pool aeration, membrane suction water production, sewage lifting pump, stirring and reflux, among which membrane aeration and purge accounts for about 40% of the MBR process. Generally, the power consumption of traditional membrane aeration and purge per ton of water is about 0.15-0.25kWh. If the electricity price is calculated at 0.8 yuan/kWh, the power consumption of membrane aeration and purge reaches 0.12-0.2 yuan/ton, which is undoubtedly the culprit of the high energy consumption of the MBR process."
-              },
-              {title:"Pain point 3: Difficulty in cleaning and maintenance",
-                desc:'Disassembly is difficult ; membrane box lifting is difficult ; fiber hair is difficult to clean ; dispensing and cleaning are complicated'
-              },
-              {title:"  Pain point 4: affecting denitrification efficiency",
-                desc:'In the A2O+MBR process, the membrane tank is over-aerated, and the nitrified liquid flows back to the anoxic tank, causing the dissolved oxygen to become too high. This consumes the carbon source required for denitrification, resulting in a reduced TN removal rate. Furthermore, the multi-stage reflux design complicates the operation mode and equipment, increasing costs.'
-              }
+              {title:t("sol_mbr_pain1_t"), desc:t("sol_mbr_pain1_d")},
+              {title:t("sol_mbr_pain2_t"), desc:t("sol_mbr_pain2_d")},
+              {title:t("sol_mbr_pain3_t"), desc:t("sol_mbr_pain3_d")},
+              {title:t("sol_mbr_pain4_t"), desc:t("sol_mbr_pain4_d")},
             ].map((c)=> (
               <div key={c.title} className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-black text-white text-sm font-semibold px-4 py-2">{c.title}</div>
@@ -83,13 +76,13 @@ export default function MunicipalIndustrialMBRPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Adaptive product series</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_adaptive_series")}</h2>
           </div>
           <div className="p-6 space-y-10">
             {/* Row 1: Aerated membrane bioreactor */}
             <div>
-              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">Aerated membrane bioreactor</div>
-              <p className="mt-3 text-sm text-gray-700 max-w-3xl">Traditional aerated membrane bioreactor. Use continuous or pulsed aeration. Municipal and industrial scenarios.</p>
+              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">{t("sol_leachate_series1")}</div>
+              <p className="mt-3 text-sm text-gray-700 max-w-3xl">{t("sol_leachate_series1_desc")}</p>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 {[
                   'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6af3dd8c-9a65-4f7e-8ee4-8acd5d3c6226.gif_560xaf.gif',
@@ -104,8 +97,8 @@ export default function MunicipalIndustrialMBRPage() {
 
             {/* Row 1: ViLEP technology */}
             <div>
-              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">ViLEP technology</div>
-              <p className="mt-3 text-sm text-gray-700 max-w-3xl">Hydrophilic PTFE resin material vs traditional fluorine resin material: lifespan extended; vibration scrubbing anti‑pollution vs traditional aeration scrubbing anti‑pollution.</p>
+              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">{t("sol_leachate_series2")}</div>
+              <p className="mt-3 text-sm text-gray-700 max-w-3xl">{t("sol_leachate_series2_desc")}</p>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 {[
                   'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/42150a51-bfc8-42ac-956b-8b8f99a4e3d5.gif_560xaf.gif',
@@ -124,14 +117,14 @@ export default function MunicipalIndustrialMBRPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Sumitomo Electric Poreflon membrane material</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("mbr_pf_heading")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
             {[
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/a869811e-8df6-4e8c-986f-3f34ed346a27.gif_366xaf.gif', title:'2 times longer service life +', desc:'High stability and corrosion resistance.'},
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/bc94cc42-ffca-49b5-ab80-e768a1c146a2.gif_366xaf.gif', title:'High durability', desc:'Excellent properties such as stability and durability.'},
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/b37bb65f-975b-464e-8d8c-57745b7356af.gif_366xaf.gif', title:'High chemical resistance', desc:'Operate stably in strong acid/alkali environments.'},
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/e729b635-7bf3-4c85-b136-6b46df428eda.gif_366xaf.gif', title:'High stain resistance', desc:'Excellent hydrophilicity resists pollutants.'},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/a869811e-8df6-4e8c-986f-3f34ed346a27.gif_366xaf.gif', title:t('mbr_pf_c1_t'), desc:t('mbr_pf_c1_d')},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/bc94cc42-ffca-49b5-ab80-e768a1c146a2.gif_366xaf.gif', title:t('mbr_pf_c2_t'), desc:t('mbr_pf_c2_d')},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/b37bb65f-975b-464e-8d8c-57745b7356af.gif_366xaf.gif', title:t('mbr_pf_c3_t'), desc:t('mbr_pf_c3_d')},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/e729b635-7bf3-4c85-b136-6b46df428eda.gif_366xaf.gif', title:t('mbr_pf_c4_t'), desc:t('mbr_pf_c4_d')},
             ].map((card,i)=> (
               <div key={i}>
                 <div className="relative w-full max-w-md mx-auto" style={{aspectRatio:'16 / 9'}}>
@@ -148,13 +141,13 @@ export default function MunicipalIndustrialMBRPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">VILEP membrane fouling control technology</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t('mbr_fouling_heading')}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {[
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/09af16c0-9a4a-4036-884f-a59d3f730e6f.gif_560xaf.gif', title:'Denitrification efficiency is greatly improved', desc:'Two‑stage reflux → two‑stage return system.'},
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/b643edae-0025-4ac9-8615-cba0f795a21a.gif_560xaf.gif', title:'Save space and peripheral equipment', desc:'Split modular design; fewer pumps.'},
-              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/548a44be-9817-411f-ac04-161d3e02248c.gif_560xaf.gif', title:'Wide range of adaptation scenarios', desc:'Stable performance under variable loads.'},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/09af16c0-9a4a-4036-884f-a59d3f730e6f.gif_560xaf.gif', title:t('mbr_fouling_c1_t'), desc:t('mbr_fouling_c1_d')},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/b643edae-0025-4ac9-8615-cba0f795a21a.gif_560xaf.gif', title:t('mbr_fouling_c2_t'), desc:t('mbr_fouling_c2_d')},
+              {img:'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/548a44be-9817-411f-ac04-161d3e02248c.gif_560xaf.gif', title:t('mbr_fouling_c3_t'), desc:t('mbr_fouling_c3_d')},
             ].map((card,i)=> (
               <div key={i}>
                 <div className="relative w-full max-w-md mx-auto" style={{aspectRatio:'16 / 9'}}>
@@ -211,19 +204,15 @@ export default function MunicipalIndustrialMBRPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Technological advantages</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t('sol_tech_adv')}</h2>
           </div>
           <div className="p-6 space-y-4">
              {[
-               {t:"High throughput",
-                d:"Stable operation at a flux of 0.6m/d (average flux); stable water production performance and operating parameters; good load impact resistance, adaptable to seasonal water quality changes and sudden high-concentration pollutant inflow."},
-               {t:"Long lifespan", 
-                 d:"It uses the world's top Sumitomo Electric Poreflon fluororesin film material; it can withstand 178 million bending tests and has a service life of more than 10 years, which is 2 to 3 times the life of PVDF film material under full load operating conditions."},
-                {t:"Low energy \nconsumption", 
-                  d:"The wastewater treatment plant uses ViLEP ultrafiltration membrane technology, which reduces power consumption from 0.15kWh/m³ to 0.01kWh/m³ compared to traditional aeration and scrubbing. Meanwhile, power consumption for return flow is reduced from 0.04kWh/m³ to 0.03kWh/m³. For example, a municipal water plant with a capacity of 100,000 tons saves over 4 million yuan in electricity costs annually."},
-               {t:"Low threshold", d:"Cleaning cycle is longer. Typical restorative cleaning cycle ~90 days, twice as long as traditional tubular membranes, reducing O&M effort."},
-               {t:"Good experience",
-                d:"Modular design, easy installation, plug and play, reducing the difficulty of on-site construction; easy replacement, just 'take it out and put it in' to complete the replacement."}           
+               {t:t('sol_mbr_adv1_t'), d:t('sol_mbr_adv1_d')},
+               {t:t('sol_mbr_adv2_t'), d:t('sol_mbr_adv2_d')},
+               {t:t('sol_mbr_adv3_t'), d:t('sol_mbr_adv3_d')},
+               {t:t('sol_mbr_adv4_t'), d:t('sol_mbr_adv4_d')},
+               {t:t('sol_mbr_adv5_t'), d:t('sol_mbr_adv5_d')}          
               ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
                 <div className="min-w-[160px] bg-black text-white text-sm font-semibold px-4 py-3 flex items-center justify-center text-center whitespace-pre-line">

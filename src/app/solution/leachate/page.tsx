@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function LeachateSolutionPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -11,11 +13,11 @@ export default function LeachateSolutionPage() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">Solution</span>
+          <span className="opacity-80">{t("sol_breadcrumb")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">Leachate treatment</span>
+          <span className="text-white">{t("sol_leachate_title")}</span>
         </div>
 
         {/* Hero */}
@@ -24,7 +26,7 @@ export default function LeachateSolutionPage() {
             <Image src="/industry.jpg" alt="Leachate solution" fill unoptimized className="object-contain" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">Leachate treatment technology package</h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">{t("sol_leachate_title")}</h1>
           </div>
         </div>
 
@@ -32,11 +34,11 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Leachate & special wastewater separation low-consumption ultrafiltration equipment</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_leachate_h2")}</h2>
           </div>
           <div className="p-6 space-y-4">
             {[
-              {t:"", d:"Landfill leachate is a highly concentrated organic wastewater containing pollutants such as organic matter, heavy metals, and salts. Traditional ultrafiltration systems suffer from short service lives, high energy consumption, and difficulty cleaning and maintenance. Existing treatment processes and equipment can generally meet production capacity and emission standards, but ignore low energy consumption requirements and are no longer able to meet the industry's low-carbon development needs."},
+              {t:"", d:t("sol_leachate_p1")},
       
             ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
@@ -60,13 +62,13 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Common processes and pain points</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_common_pp")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
             {[
-              {title:"Pain point 1: Short lifespan", desc:"External tubular ultrafiltration has a short lifespan and is easily clogged by oil, fiber, particles and other dirt; service life generally about 3 to 5 years."},
-              {title:"Pain point 2: High energy consumption", desc:"Cross‑flow filtration consumes high energy; treating high‑TDS streams is costly due to elevated electricity demand."},
-              {title:"Pain point 3: Difficulty in cleaning and maintenance", desc:"Traditional units are not resistant to oil or drug contamination; fiber hair is difficult to clean and disassembly is complicated."},
+              {title:t("sol_leachate_pain1"), desc:t("sol_leachate_pain1_d")},
+              {title:t("sol_leachate_pain2"), desc:t("sol_leachate_pain2_d")},
+              {title:t("sol_leachate_pain3"), desc:t("sol_leachate_pain3_d")},
             ].map((c)=> (
               <div key={c.title} className="border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-black text-white text-sm font-semibold px-4 py-2">{c.title}</div>
@@ -80,13 +82,13 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-1">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Adaptive product series</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_adaptive_series")}</h2>
           </div>
           <div className="p-6 space-y-10">
             {/* Row 1: Aerated membrane bioreactor */}
             <div>
-              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">Aerated membrane bioreactor</div>
-              <p className="mt-3 text-sm text-gray-700 max-w-3xl">Traditional aerated membrane bioreactor. Use continuous or pulsed aeration. Municipal and industrial scenarios.</p>
+              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">{t("sol_leachate_series1")}</div>
+              <p className="mt-3 text-sm text-gray-700 max-w-3xl">{t("sol_leachate_series1_desc")}</p>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-1 items-center">
                 {[
                   'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6af3dd8c-9a65-4f7e-8ee4-8acd5d3c6226.gif_560xaf.gif',
@@ -101,8 +103,8 @@ export default function LeachateSolutionPage() {
 
             {/* Row 1: ViLEP technology */}
             <div>
-              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">ViLEP technology</div>
-              <p className="mt-3 text-sm text-gray-700 max-w-3xl">Hydrophilic PTFE resin material vs traditional fluorine resin material: lifespan extended; vibration scrubbing anti‑pollution vs traditional aeration scrubbing anti‑pollution.</p>
+              <div className="inline-flex items-center rounded bg-black text-white text-xs font-medium px-6 py-3">{t("sol_leachate_series2")}</div>
+              <p className="mt-3 text-sm text-gray-700 max-w-3xl">{t("sol_leachate_series2_desc")}</p>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                 {[
                   'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/42150a51-bfc8-42ac-956b-8b8f99a4e3d5.gif_560xaf.gif',
@@ -121,10 +123,10 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Energy consumption reduced by 85%+</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_energy_reduced")}</h2>
           </div>
           <div className="p-6">
-            <p className="text-sm text-gray-700 max-w-4xl">Illustrative comparison of different process routes and typical engineering applications. Replace the following images with the exact assets from the design.</p>
+            <p className="text-sm text-gray-700 max-w-4xl">{t("sol_energy_note")}</p>
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 items-center">
               {['https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/7323f561-682c-4dbb-a80c-e7a6da82c790.png_1180xaf.png','https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/2ae59fe2-2cf4-4835-b90a-d67effb1c118.webp_1180xaf.webp'].map((src, i) => (
                 <div key={i} className="relative w-full" style={{aspectRatio:'3 / 1'}}>
@@ -139,11 +141,11 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Overview</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_overview")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="text-sm text-gray-700 leading-relaxed">
-              To address the unique characteristics of leachate and special wastewater, this package offers the VILEP low‑energy, anti‑pollution vibrating membrane technology. It is suitable for both new projects and membrane replacements, providing advantages such as strong oil resistance and anti‑pollution properties, easier maintenance, ~1 kWh of electricity per ton of water, doubled service life, and stable, low‑carbon operation.
+              {t("sol_leachate_final_desc")}
             </div>
             <div className="relative w-full" style={{aspectRatio:'16 / 9'}}>
               <Image src="https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/95cc2b5a-04bf-4de8-a874-c3b8288a47c2.webp_1180xaf.webp" alt="Solution overview" fill unoptimized className="object-contain" />
@@ -153,14 +155,14 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Technological advantages</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_tech_adv")}</h2>
           </div>
           <div className="p-6 space-y-4">
              {[
-               {t:"Oil resistant and\npollution resistant", d:"Using Japan’s Sumitomo Electric Poreflon hydrophilic fluororesin material, it can effectively resist organic pollution, scaling pollution and cellulose pollution for high‑concentration, high‑hardness, and high‑alkalinity landfill leachate."},
-               {t:"1 ton of water\n1 kwh of electricity", d:"Compared with traditional tubular membranes, VILEP’s energy‑saving and anti‑pollution ultrafiltration membrane consumes only about 0.8–1.0 kWh of electricity per ton of produced water."},
-               {t:"Double lifespan", d:"Compared to general tubular membranes, VILEP’s energy‑saving and anti‑pollution ultrafiltration membrane has a lifespan of 5–10 years (compared to 3–5 years for traditional)."},
-               {t:"Easier\nmaintenance", d:"Cleaning cycle is longer. Typical restorative cleaning cycle ~90 days, twice as long as traditional tubular membranes, reducing O&M effort."},
+               {t:t("sol_leachate_adv1_t"), d:t("sol_leachate_adv1_d")},
+               {t:t("sol_leachate_adv2_t"), d:t("sol_leachate_adv2_d")},
+               {t:t("sol_leachate_adv3_t"), d:t("sol_leachate_adv3_d")},
+               {t:t("sol_leachate_adv4_t"), d:t("sol_leachate_adv4_d")},
             ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
                 <div className="min-w-[160px] bg-black text-white text-sm font-semibold px-4 py-3 flex items-center justify-center text-center whitespace-pre-line">
@@ -176,17 +178,16 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">
-            We provide equipment products</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_we_provide")}</h2>
           </div>
           <div className="p-6">
             <ul className="space-y-3 text-sm text-gray-700 list-disc pl-5">
               {[
-                'Oil‑resistant, anti‑pollution, stable operation',
-                'Low energy consumption; ~1 kWh per ton of water',
-                'Extended service life; reduced replacement frequency',
-                'Modular, easy installation and maintenance',
-                'Wide adaptability to seasonal and shock loads',
+                t('sol_we_provide_list_1'),
+                t('sol_we_provide_list_2'),
+                t('sol_we_provide_list_3'),
+                t('sol_we_provide_list_4'),
+                t('sol_we_provide_list_5'),
               ].map((point, i) => (
                 <li key={i}>{point}</li>
               ))}
@@ -197,24 +198,24 @@ export default function LeachateSolutionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Application highlights</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_app_highlights")}</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {[
               {
                 img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/8048c8c4-6051-4f1f-8465-6a8ccc651b7c.webp_560xaf.webp',
-                title: 'Long lifespan',
-                desc:"  Completely remove pollution, strong oil resistance and drug resistance"
+                title: t('sol_highlight_1_t'),
+                desc: t('sol_highlight_1_d')
                             },
               {
                 img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/d6d30694-0975-4788-9ba7-451adf888236.webp_560xaf.webp',
-                title: 'Low energy consumption',
-                desc: '    Simple negative pressure suction and vibration'
+                title: t('sol_highlight_2_t'),
+                desc: t('sol_highlight_2_d')
               },
               {
                 img: 'https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/d957cebc-fc2a-4c36-8351-d456210f83e4.webp_560xaf.webp',
-                title: 'Easy to clean & maintain',
-                desc:"  Completely remove pollution, strong oil resistance and drug resistance"
+                title: t('sol_highlight_3_t'),
+                desc: t('sol_highlight_3_d')
 
               },
             ].map((card, i) => (

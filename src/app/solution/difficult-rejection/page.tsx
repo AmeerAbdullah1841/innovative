@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function DifficultRejectionPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -11,34 +13,29 @@ export default function DifficultRejectionPage() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <span className="opacity-80">Solution</span>
+          <span className="opacity-80">{t("sol_breadcrumb")}</span>
           <span className="mx-2">›</span>
-          <span className="text-white">  
-    Oilfield reinjection water treatment technology
-        </span>
+          <span className="text-white">{t("sol_oilfield_title")}</span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-black rounded-2xl p-6 shadow-xl">
           <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
             <Image src="/oil-water.jpg" alt="Difficult rejection" fill unoptimized className="object-contain" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">
-    Oilfield reinjection water treatment technology
-        </h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-200 mb-4">{t("sol_oilfield_title")}</h1>
           </div>
         </div>
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900"> 
-            Municipal & Industrial Wastewater Low Carbon MBR Technology Package</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_mbr_title")}</h2>
           </div>
           <div className="p-6 space-y-4">
             {[
               {t:"",
-                d:"Currently, MBR technology is widely used in the water treatment industry, but it still has pain points such as short service life, high operating energy consumption, difficult cleaning and maintenance, and unstable denitrification and phosphorus removal. These problems not only trouble customers but also hinder the low-carbon development of the membrane industry. In response, Suke Environmental Protection has developed a low-carbon MBR technology package for municipal and industrial wastewater, creating a product with high operating flux, long service life, low operating energy consumption, long cleaning cycles, low user barriers, good user experience, high denitrification efficiency, and a wide range of adaptability scenarios, allowing customers to truly save money, worry, and effort."}
+                d:t("sol_mbr_p1")}
             ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
                 <div className="min-w-[160px] bg-black text-white text-sm font-semibold px-4 py-3 flex items-center justify-center text-center whitespace-pre-line">
@@ -55,26 +52,20 @@ export default function DifficultRejectionPage() {
              <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-blue-600 rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Common processes and pain points</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_oilfield_common_pp")}</h2>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <p className="text-gray-700 mb-6">
-                  Although membrane filtration technology can solve the problems of the above processes,
-                </p>
+                <p className="text-gray-700 mb-6">{t('sol_oilfield_p1')}</p>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The oil resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Oil accumulation causes flux to drop quickly, leading to short cleaning cycles (7-10 days) and troublesome maintenance for ceramic and PVDF membranes.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h1')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d1')}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The acid and alkali resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Cleaning chemicals, especially for oil, cause deterioration, requiring strong alkali resistance, and shortening the lifespan to 1-3 years.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h2')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d2')}</p>
                   </div>
                 </div>
               </div>
@@ -94,7 +85,7 @@ export default function DifficultRejectionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-blue-600 rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Problems with membrane filtration technology</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_oilfield_prob_heading2")}</h2>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -108,21 +99,15 @@ export default function DifficultRejectionPage() {
                 />
               </div>
               <div>
-                <p className="text-gray-700 mb-6">
-                  Although membrane filtration technology can solve the problems of the above processes,
-                </p>
+                <p className="text-gray-700 mb-6">{t('sol_oilfield_p1')}</p>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The oil resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Oil accumulation causes flux to drop quickly, leading to short cleaning cycles (7-10 days) and troublesome maintenance for ceramic and PVDF membranes.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h1')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d1')}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The acid and alkali resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Cleaning chemicals, especially for oil, cause deterioration, requiring strong alkali resistance, and shortening the lifespan to 1-3 years.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h2')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d2')}</p>
                   </div>
                 </div>
               </div>
@@ -133,28 +118,21 @@ export default function DifficultRejectionPage() {
            <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-blue-600 rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">
-        ViLEP membrane filtration technology</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_oilfield_vilep_heading")}</h2>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
              
               <div>
-                <p className="text-gray-700 mb-6">
-                  Although membrane filtration technology can solve the problems of the above processes,
-                </p>
+                <p className="text-gray-700 mb-6">{t('sol_oilfield_p1')}</p>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The oil resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Oil accumulation causes flux to drop quickly, leading to short cleaning cycles (7-10 days) and troublesome maintenance for ceramic and PVDF membranes.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h1')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d1')}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The acid and alkali resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Cleaning chemicals, especially for oil, cause deterioration, requiring strong alkali resistance, and shortening the lifespan to 1-3 years.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h2')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d2')}</p>
                   </div>
                 </div>
               </div>
@@ -174,7 +152,7 @@ export default function DifficultRejectionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-blue-600 rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Features of ViLEP membrane filtration technology</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_oilfield_features_heading")}</h2>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -188,21 +166,15 @@ export default function DifficultRejectionPage() {
                 />
               </div>
               <div>
-                <p className="text-gray-700 mb-6">
-                  Although membrane filtration technology can solve the problems of the above processes,
-                </p>
+                <p className="text-gray-700 mb-6">{t('sol_oilfield_p1')}</p>
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The oil resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Oil accumulation causes flux to drop quickly, leading to short cleaning cycles (7-10 days) and troublesome maintenance for ceramic and PVDF membranes.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h1')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d1')}</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">The acid and alkali resistance of the membrane material</h3>
-                    <p className="text-sm text-gray-700">
-                      Cleaning chemicals, especially for oil, cause deterioration, requiring strong alkali resistance, and shortening the lifespan to 1-3 years.
-                    </p>
+                    <h3 className="font-semibold text-gray-900 mb-2">{t('sol_oilfield_p1_h2')}</h3>
+                    <p className="text-sm text-gray-700">{t('sol_oilfield_p1_d2')}</p>
                   </div>
                 </div>
               </div>
@@ -228,18 +200,14 @@ export default function DifficultRejectionPage() {
         <section className="mt-10 bg-white rounded-2xl shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
             <div className="h-6 w-1.5 bg-black rounded" />
-            <h2 className="text-lg font-semibold text-gray-900">Technological advantages</h2>
+            <h2 className="text-lg font-semibold text-gray-900">{t("sol_oilfield_tech_adv_heading")}</h2>
           </div>
           <div className="p-6 space-y-4">
              {[
-               {t:"Oil resistant and \npollution resistant",
-                d:"The use of Japan's Sumitomo Electric Poreflon hydrophilic fluororesin membrane material can effectively resist oil pollution in the re-injection water of oil fields with high oil content."},
-               {t:"Long service life", 
-                 d:"Willup's energy-saving and anti-pollution ultrafiltration membrane has a longer service life of 5 to 10 years."},
-                {t:"Stable and \nlower carbon", 
-                  d:"Compared with traditional ceramic membranes, which generally consume 2.0-3.0kWh of electricity per ton of water, the energy-saving and anti-pollution ultrafiltration membrane of Willup only consumes 0.8-1.0kWh of electricity per ton of water, saving an average of more than 50% of energy."},
-               {t:"Easier maintenance", 
-                 d:"It can also operate stably in high-concentration oily wastewater, further eliminating the need for coagulation/flocculation/flotation equipment, making the process more convenient and the cleaning cycle 15 to 30 days per time."}           
+               {t:t('sol_oilfield_adv1_t'), d:t('sol_oilfield_adv1_d')},
+               {t:t('sol_oilfield_adv2_t'), d:t('sol_oilfield_adv2_d')},
+               {t:t('sol_oilfield_adv3_t'), d:t('sol_oilfield_adv3_d')},
+               {t:t('sol_oilfield_adv4_t'), d:t('sol_oilfield_adv4_d')}           
               ].map((item, i) => (
               <div key={i} className="flex items-stretch border border-gray-200 rounded-lg overflow-hidden">
                 <div className="min-w-[160px] bg-black text-white text-sm font-semibold px-4 py-3 flex items-center justify-center text-center whitespace-pre-line">

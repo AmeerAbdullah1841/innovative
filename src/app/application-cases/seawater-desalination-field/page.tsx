@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/components/I18nProvider";
 
 export default function SeawaterDesalinationFieldPage() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
@@ -11,47 +13,47 @@ export default function SeawaterDesalinationFieldPage() {
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-sm text-white/80 mb-6">
-          <Link href="/" className="hover:underline">Home</Link>
+          <Link href="/" className="hover:underline">{t("nav_home")}</Link>
           <span className="mx-2">›</span>
-          <Link href="/application-cases" className="hover:underline">Application Cases</Link>
+          <Link href="/application-cases" className="hover:underline">{t("ac_breadcrumb")}</Link>
           <span className="mx-2">›</span>
-          <span className="text-white">Seawater desalination field</span>
+          <span className="text-white">{t("ac_seawater")}</span>
         </div>
 
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Application Cases</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{t("ac_hero_title")}</h1>
         </div>
 
         {/* Application Categories Tabs */}
         <div className="bg-black rounded-2xl shadow-xl p-6 mb-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
             <Link href="/application-cases/leachate-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              Leachate field
+              {t("ac_leachate")}
             </Link>
             <Link href="/application-cases/municipal-sector" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              Municipal sector
+              {t("ac_municipal")}
             </Link>
             <Link href="/application-cases/printing-dyeing-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              Printing and dyeing field
+              {t("ac_printing")}
             </Link>
             <Link href="/application-cases/coal-chemical-petrochemical" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              Coal Chemical & Petrochemical
+              {t("ac_coal")}
             </Link>
             <Link href="/application-cases/steel-nonferrous-metals" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              Steel and nonferrous metals sector
+              {t("ac_steel")}
             </Link>
             <Link href="/application-cases/seawater-desalination-field" className="px-4 py-2 text-sm text-black bg-white rounded-lg font-semibold">
-              Seawater desalination field
+              {t("ac_seawater")}
             </Link>
             <Link href="/application-cases/electronic-electroplating-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              Electronic electroplating field
+              {t("ac_electronic")}
             </Link>
             <Link href="/application-cases/drinking-water-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              High-quality drinking water field
+              {t("ac_drinking")}
             </Link>
             <Link href="/application-cases/more-areas" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              More other areas
+              {t("ac_more")}
             </Link>
           </div>
         </div>
@@ -62,33 +64,33 @@ export default function SeawaterDesalinationFieldPage() {
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
               <div className="w-4 h-4 bg-black rounded-full"></div>
             </div>
-            <h2 className="text-2xl font-bold text-white">Seawater desalination field</h2>
+            <h2 className="text-2xl font-bold text-white">{t("ac_seawater")}</h2>
           </div>
           
           <div className="space-y-3 mb-8">
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-white">Offshore platform seawater desalination in Bohai Bay</p>
+              <p className="text-white">{t("ac_seawater_li1")}</p>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-white">Island seawater desalination project in Hainan</p>
+              <p className="text-white">{t("ac_seawater_li2")}</p>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-white">Coastal city seawater desalination in Qingdao</p>
+              <p className="text-white">{t("ac_seawater_li3")}</p>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-white">Marine vessel seawater desalination system</p>
+              <p className="text-white">{t("ac_seawater_li4")}</p>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-white">Industrial seawater desalination in Dalian</p>
+              <p className="text-white">{t("ac_seawater_li5")}</p>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-white">Emergency seawater desalination in Xiamen</p>
+              <p className="text-white">{t("ac_seawater_li6")}</p>
             </div>
           </div>
 
