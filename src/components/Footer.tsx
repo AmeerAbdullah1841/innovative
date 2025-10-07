@@ -28,9 +28,9 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold mb-3">{t("footer_contact_title")}</h4>
             <ul className="space-y-2 text-sm text-white/80">
-              <li>{t("footer_email")}: contact@sustonix.com</li>
-              <li>{t("footer_phone")}: +00 000 0000</li>
-              <li>{t("footer_address")}: 123 Industrial Park, City</li>
+              <li>{t("footer_email")}: Info@sustonix.com</li>
+              <li>{t("footer_phone")}: +86 138 1625 6916</li>
+              <li>{t("footer_address")}: RM.1801, EASEY COMM. BLDG., 253-261 HENNESSY ROAD, WAN CHAI HONG KONG</li>
             </ul>
           </div>
         </div>

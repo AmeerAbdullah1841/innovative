@@ -144,14 +144,14 @@ export default function Navbar() {
 
   return (
     <nav
-      className="border-b border-gray-200 bg-white/50 hover:bg-white transition-colors backdrop-blur supports-[backdrop-filter]:bg-white/40 sticky top-0 z-50"
+      className="border-b border-gray-200 bg-white hover:bg-white transition-colors sticky top-0 z-50"
       onMouseLeave={() => setOpenDropdown(null)}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/logo.jpeg"
+              src="/new-logo.jpeg"
               alt="Sustonix logo"
               width={320}
               height={320}
@@ -239,13 +239,13 @@ export default function Navbar() {
                   {currentItem?.label === "Contact" ? (
                     <ul className="space-y-1">
                       <li>
-                        <span className="font-medium">{t("footer_email")}:</span> contact@sustonix.com
+                        <span className="font-medium">{t("footer_email")}:</span> Info@sustonix.com
                       </li>
                       <li>
-                        <span className="font-medium">{t("footer_phone")}:</span> +00 000 0000
+                        <span className="font-medium">{t("footer_phone")}:</span> +86 138 1625 6916
                       </li>
                       <li>
-                        <span className="font-medium">{t("footer_address")}:</span> 123 Industrial Park, City
+                        <span className="font-medium">{t("footer_address")}:</span> RM.1801, EASEY COMM. BLDG., 253-261 HENNESSY ROAD, WAN CHAI HONG KONG
                       </li>
                     </ul>
                   ) : (

@@ -16,7 +16,7 @@ export const dictionaries: Record<Lang, Dict> = {
     // Common CTA
     contact_us: "Contact us",
     hero_title_1: "Sustonix",
-    hero_desc_1: "Sustainable solutions, engineered for impact.",
+    hero_desc_1: "Solutions Today, Sustainability Forever",
     hero_title_2: "Committed to becoming a global leading filtration and separation technology solutions company",
     hero_desc_2: "Guided by the ultimate customer experience and driven by customer value creation,we provide highly competitive 'water resources and carbon management' technology solutions for niche application scenarios.",
     hero_title_3: "Redefine membrane separation & redefine water resources",
