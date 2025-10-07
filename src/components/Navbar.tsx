@@ -148,14 +148,14 @@ export default function Navbar() {
       onMouseLeave={() => setOpenDropdown(null)}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo.jpeg"
               alt="Sustonix logo"
               width={320}
               height={320}
-              className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
+              className="h-14 w-auto sm:h-16 md:h-20 lg:h-20 object-contain"
             />
           </Link>
           <button
@@ -176,7 +176,7 @@ export default function Navbar() {
                     <div className="relative group">
                       <Link
                         href={item.href || "/"}
-                        className="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 rounded-md"
+                        className="inline-flex items-center gap-1 px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-200 rounded-md"
                         onMouseEnter={() => {
                           setOpenDropdown(item.label);
                           setActiveChild(item.children?.[0] || null);
@@ -193,7 +193,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href || "/"}
-                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md"
+                    className="inline-flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md"
                     onMouseEnter={() => setOpenDropdown(item.label)}
                   >
                     {getDisplayLabel(item.label)}
