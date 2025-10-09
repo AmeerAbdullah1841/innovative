@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# archives
+*.zip
+
 # production
 /build
 
