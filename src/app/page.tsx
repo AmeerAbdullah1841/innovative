@@ -207,7 +207,7 @@ export default function Home() {
   useEffect(() => {
     const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 4000);
     return () => clearInterval(id);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="relative flex flex-col">
@@ -222,6 +222,7 @@ export default function Home() {
             alt="Hero slide"
             fill
             priority={i === 0}
+            unoptimized
             className="object-cover transition-transform duration-700"
             style={{ transform: `translateX(${(i - index) * 100}%)` }}
           />
@@ -252,7 +253,7 @@ export default function Home() {
       {/* Stats section ,  decades of industry development*/}
       <section className="relative z-10 w-full h-screen overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/industry.jpg" alt="Background" fill className="object-cover" />
+          <Image src="/industry.jpg" alt="Background" fill unoptimized className="object-cover" />
           <div className="absolute inset-0 bg-blue-900/40" />
         </div>
         <div className="relative mx-auto max-w-6xl h-full px-6 py-8 text-white flex flex-col justify-center transform -translate-y-12 sm:-translate-y-16 md:-translate-y-20 lg:-translate-y-24">
@@ -283,7 +284,7 @@ export default function Home() {
       <section className="relative w-full min-h-screen overflow-hidden">
         {/* Background image layer */}
         <div className="absolute inset-0">
-          <Image src="/grey-2.jpg" alt="Section background" fill className="object-cover" />
+          <Image src="/grey-2.jpg" alt="Section background" fill unoptimized className="object-cover" />
           <div className="absolute inset-0 bg-black/30" />
         </div>
         <div className="relative z-10 mx-auto max-w-6xl h-full px-6 pt-8 md:py-8 grid gap-8 md:grid-cols-2 items-center text-white">
@@ -348,7 +349,7 @@ export default function Home() {
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0">
-          <Image src="/grey.jpg" alt="Fields background" fill className="object-cover" />
+          <Image src="/grey.jpg" alt="Fields background" fill unoptimized className="object-cover" />
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
@@ -367,7 +368,7 @@ export default function Home() {
             ].map((f) => (
               <div key={f.name} className="group relative rounded-xl overflow-hidden shadow-md ring-1 ring-white/10 transition-transform duration-300 hover:shadow-xl hover:ring-white/40 transform hover:-translate-y-1">
                 <div className="relative h-40 sm:h-48 md:h-56 w-full">
-                  <Image src={f.image} alt={f.name} fill unoptimized className="object-cover transition-transform duration-500 group-hover:scale-110" />
+              <Image src={f.image} alt={f.name} fill unoptimized className="object-cover transition-transform duration-500 group-hover:scale-110" />
                 </div>
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-transform duration-300 group-hover:-translate-y-1">
@@ -384,7 +385,7 @@ export default function Home() {
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
-          <Image src="/grey-3.jpg" alt="News background" fill className="object-cover" />
+          <Image src="/grey-3.jpg" alt="News background" fill unoptimized className="object-cover" />
           <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px]" />
         </div>
 
@@ -393,7 +394,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6 flex-1">
             {/* Left: Featured slider placeholder */}
             <div className="relative rounded-xl overflow-hidden shadow ring-1 ring-black/10 bg-white/80">
-              <Image src="/news-2.jpg" alt="Featured" fill className="object-cover opacity-90" />
+              <Image src="/news-2.jpg" alt="Featured" fill unoptimized className="object-cover opacity-90" />
               <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent text-white">
                 <div className="text-sm uppercase tracking-wide">{t("featured")}</div>
                 <div className="mt-2 text-lg sm:text-xl font-semibold">{t("news_featured_title")}</div>

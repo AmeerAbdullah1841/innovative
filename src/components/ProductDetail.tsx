@@ -22,7 +22,7 @@ export default function ProductDetail({ titleKey, images, descriptionKey, specs,
     <div className="min-h-screen relative">
       {/* Full-page background (like POREFLON page) */}
       <div className="absolute inset-0">
-        <Image src={backgroundImage} alt="Background" fill className="object-cover" />
+        <Image src={backgroundImage} alt="Background" fill unoptimized className="object-cover" />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
@@ -39,7 +39,7 @@ export default function ProductDetail({ titleKey, images, descriptionKey, specs,
           <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {images.map((src, idx) => (
               <div key={idx} className="relative h-48 w-full rounded-lg overflow-hidden ring-1 ring-gray-200">
-                <Image src={src} alt={`${t(titleKey)} ${idx + 1}`} fill className="object-cover" />
+                <Image src={src} alt={`${t(titleKey)} ${idx + 1}`} fill unoptimized className="object-cover" />
               </div>
             ))}
           </div>

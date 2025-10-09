@@ -155,6 +155,7 @@ export default function Navbar() {
               alt="Sustonix logo"
               width={320}
               height={320}
+              unoptimized
               className="h-14 w-auto sm:h-16 md:h-20 lg:h-20 object-contain"
             />
           </Link>
@@ -218,6 +219,9 @@ export default function Navbar() {
             </button>
             <button className={`px-2 py-1 rounded text-xs ${lang === "it" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("it")}>
               IT
+            </button>
+            <button className={`px-2 py-1 rounded text-xs ${lang === "de" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("de")}>
+              DE
             </button>
           </div>
         </div>
@@ -462,6 +466,7 @@ export default function Navbar() {
                     alt={currentItem.label}
                     width={currentItem.label === "Product Center" || currentItem.label === "Solution" || currentItem.label ===  "Application Cases" ? 280 : 180}
                     height={currentItem.label === "Product Center" || currentItem.label === "Solution" || currentItem.label === "Application Cases" ? 180 : 120}
+                    unoptimized
                     className="rounded object-cover"
                   />
                 )}
@@ -631,6 +636,7 @@ export default function Navbar() {
               <button className={`px-2 py-1 rounded ${lang === "ru" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("ru")}>RU</button>
               <button className={`px-2 py-1 rounded ${lang === "fr" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("fr")}>FR</button>
               <button className={`px-2 py-1 rounded ${lang === "it" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("it")}>IT</button>
+              <button className={`px-2 py-1 rounded ${lang === "de" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("de")}>DE</button>
             </li>
           </ul>
         </div>
