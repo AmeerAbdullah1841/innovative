@@ -103,6 +103,7 @@ const navItems: NavItem[] = [
       { label: "More other areas", href: "/application-cases/more-areas" },
     ],
   },
+  { label: "Join Us", href: "/joining-support" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -135,6 +136,8 @@ export default function Navbar() {
         return t("nav_about");
       case "Join Us":
         return t("nav_join");
+      case "Joining Support":
+        return t("nav_joining_support");
       case "Contact":
         return t("nav_contact");
       default:
@@ -149,19 +152,19 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <Image
               src="/new-logo.jpeg"
               alt="Sustonix logo"
               width={320}
               height={320}
               unoptimized
-              className="h-14 w-auto sm:h-16 md:h-20 lg:h-20 object-contain"
+              className="h-12 w-auto sm:h-14 md:h-16 lg:h-16 object-contain"
             />
           </Link>
           <button
             aria-label="Toggle menu"
-            className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 sm:hidden"
+            className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 lg:hidden"
             onClick={() => setMobileOpen((v) => !v)}
           >
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,22 +172,23 @@ export default function Navbar() {
             </svg>
           </button>
 
-          <ul className="hidden sm:flex items-stretch gap-2">
-            {navItems.map((item) => (
+          {/* Medium screen navigation - fewer items */}
+          <ul className="hidden md:flex lg:hidden items-stretch gap-1 flex-1 justify-center max-w-3xl">
+            {navItems.slice(0, 4).map((item) => (
               <li key={item.label} className="relative group">
                 {item.children ? (
                   <>
                     <div className="relative group">
                       <Link
                         href={item.href || "/"}
-                        className="inline-flex items-center gap-1 px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-200 rounded-md"
+                        className="inline-flex items-center gap-1 px-2 py-2 text-base font-medium text-gray-700 hover:bg-gray-200 rounded-md whitespace-nowrap"
                         onMouseEnter={() => {
                           setOpenDropdown(item.label);
                           setActiveChild(item.children?.[0] || null);
                         }}
                       >
                         {getDisplayLabel(item.label)}
-                        <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <svg className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                           <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.957a.75.75 0 111.08 1.04l-4.24 4.52a.75.75 0 01-1.08 0l-4.24-4.52a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                         </svg>
                       </Link>
@@ -194,8 +198,46 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href || "/"}
-                    className="inline-flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md"
+                    className="inline-flex items-center px-2 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md whitespace-nowrap"
                     onMouseEnter={() => setOpenDropdown(item.label)}
+                    onClick={item.label === "Contact" ? (e) => e.preventDefault() : undefined}
+                  >
+                    {getDisplayLabel(item.label)}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Large screen navigation - all items */}
+          <ul className="hidden lg:flex items-stretch gap-1 flex-1 justify-center max-w-4xl">
+            {navItems.map((item) => (
+              <li key={item.label} className="relative group">
+                {item.children ? (
+                  <>
+                    <div className="relative group">
+                      <Link
+                        href={item.href || "/"}
+                        className="inline-flex items-center gap-1 px-2 py-2 text-base font-medium text-gray-700 hover:bg-gray-200 rounded-md whitespace-nowrap"
+                        onMouseEnter={() => {
+                          setOpenDropdown(item.label);
+                          setActiveChild(item.children?.[0] || null);
+                        }}
+                      >
+                        {getDisplayLabel(item.label)}
+                        <svg className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.957a.75.75 0 111.08 1.04l-4.24 4.52a.75.75 0 01-1.08 0l-4.24-4.52a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                        </svg>
+                      </Link>
+                    </div>
+                    {/* Full-width panel rendered below the navbar; see below */}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href || "/"}
+                    className="inline-flex items-center px-2 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 rounded-md whitespace-nowrap"
+                    onMouseEnter={() => setOpenDropdown(item.label)}
+                    onClick={item.label === "Contact" ? (e) => e.preventDefault() : undefined}
                   >
                     {getDisplayLabel(item.label)}
                   </Link>
@@ -204,23 +246,23 @@ export default function Navbar() {
             ))}
           </ul>
           {/* Desktop language switcher */}
-          <div className="hidden sm:flex items-center gap-2 ml-2">
-            <button className={`px-2 py-1 rounded text-xs ${lang === "en" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("en")}>
+          <div className="hidden lg:flex items-center gap-1 ml-2 flex-shrink-0">
+            <button className={`px-2 py-1 rounded text-sm ${lang === "en" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("en")}>
               EN
             </button>
-            <button className={`px-2 py-1 rounded text-xs ${lang === "zh" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("zh")}>
+            <button className={`px-2 py-1 rounded text-sm ${lang === "zh" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("zh")}>
               中文
             </button>
-            <button className={`px-2 py-1 rounded text-xs ${lang === "ru" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("ru")}>
+            <button className={`px-2 py-1 rounded text-sm ${lang === "ru" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("ru")}>
               RU
             </button>
-            <button className={`px-2 py-1 rounded text-xs ${lang === "fr" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("fr")}>
+            <button className={`px-2 py-1 rounded text-sm ${lang === "fr" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("fr")}>
               FR
             </button>
-            <button className={`px-2 py-1 rounded text-xs ${lang === "it" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("it")}>
+            <button className={`px-2 py-1 rounded text-sm ${lang === "it" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("it")}>
               IT
             </button>
-            <button className={`px-2 py-1 rounded text-xs ${lang === "de" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("de")}>
+            <button className={`px-2 py-1 rounded text-sm ${lang === "de" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("de")}>
               DE
             </button>
           </div>
@@ -256,7 +298,7 @@ export default function Navbar() {
                     currentItem?.description ? t(currentItem.description) : ""
                   )}
                 </div>
-                {(activeSubChild?.href || activeChild?.href || currentItem?.label === "Product Center" || currentItem?.label === "Application Cases") && (
+                {(activeSubChild?.href || activeChild?.href || currentItem?.label === "Product Center" || currentItem?.label === "Application Cases") && currentItem?.label !== "Contact" && (
                   <div className="mt-3">
                     <Link
                       href={
@@ -477,13 +519,13 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="sm:hidden border-t border-gray-200">
+        <div className="lg:hidden border-t border-gray-200">
           <ul className="px-2 py-2">
             {navItems.map((item) => (
               <li key={item.label} className="">
                 {item.children ? (
                   <details className="group">
-                    <summary className="flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                    <summary className="flex cursor-pointer list-none items-center justify-between rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">
                       {getDisplayLabel(item.label)}
                       <span className="ml-2">▾</span>
                     </summary>
@@ -621,8 +663,14 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href || "/"}
-                    className="block rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
-                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100"
+                    onClick={(e) => {
+                      if (item.label === "Contact") {
+                        e.preventDefault();
+                      } else {
+                        setMobileOpen(false);
+                      }
+                    }}
                   >
                     {item.label}
                   </Link>
@@ -631,12 +679,12 @@ export default function Navbar() {
             ))}
             <li className="mt-2 flex items-center gap-2 px-3 py-2 text-sm text-gray-700">
               <span>{t("language")}:</span>
-              <button className={`px-2 py-1 rounded ${lang === "en" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("en")}>EN</button>
-              <button className={`px-2 py-1 rounded ${lang === "zh" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("zh")}>中文</button>
-              <button className={`px-2 py-1 rounded ${lang === "ru" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("ru")}>RU</button>
-              <button className={`px-2 py-1 rounded ${lang === "fr" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("fr")}>FR</button>
-              <button className={`px-2 py-1 rounded ${lang === "it" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("it")}>IT</button>
-              <button className={`px-2 py-1 rounded ${lang === "de" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("de")}>DE</button>
+              <button className={`px-2 py-1 rounded text-sm ${lang === "en" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("en")}>EN</button>
+              <button className={`px-2 py-1 rounded text-sm ${lang === "zh" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("zh")}>中文</button>
+              <button className={`px-2 py-1 rounded text-sm ${lang === "ru" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("ru")}>RU</button>
+              <button className={`px-2 py-1 rounded text-sm ${lang === "fr" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("fr")}>FR</button>
+              <button className={`px-2 py-1 rounded text-sm ${lang === "it" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("it")}>IT</button>
+              <button className={`px-2 py-1 rounded text-sm ${lang === "de" ? "bg-black text-white" : "bg-gray-100"}`} onClick={() => setLang("de")}>DE</button>
             </li>
           </ul>
         </div>

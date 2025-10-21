@@ -22,7 +22,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold mb-3">{t("footer_company_title")}</h4>
             <ul className="space-y-2 text-sm text-white/80">
               <li><Link href="/" className="hover:text-white">{t("nav_home")}</Link></li>
-              <li><Link href="#" className="hover:text-white">{t("nav_about")}</Link></li>
+              <li><Link href="/joining-support" className="hover:text-white">{t("nav_join")}</Link></li>
             </ul>
           </div>
           <div>
@@ -36,7 +36,6 @@ export default function Footer() {
         </div>
         <div className="mt-8 pt-6 border-t border-white/10 text-xs text-white/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span>© {new Date().getFullYear()} Sustonix. {t("footer_rights")}</span>
-          <span>{t("footer_built_with")}</span>
         </div>
       </div>
     </footer>
