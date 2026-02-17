@@ -10,7 +10,7 @@ export async function GET() {
       { authenticated },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { authenticated: false },
       { status: 200 }

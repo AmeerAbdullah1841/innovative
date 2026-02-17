@@ -17,7 +17,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
         if (!data.authenticated) {
           router.push("/admin/login");
         }
-      } catch (error) {
+      } catch {
         router.push("/admin/login");
       }
     };

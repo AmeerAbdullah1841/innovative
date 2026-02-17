@@ -30,7 +30,8 @@ export default function Home() {
     { src: "/i10.jpg", title: t("hero_title_3"), description: t("hero_desc_3") },
     { src: "/i4.jpg", title: t("hero_title_4"), description: t("hero_desc_4") },
   ];
-  const formatName = (name: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _formatName = (name: string) => {
     const words = name.split(" ").filter(Boolean);
     const first = words.slice(0, 3).join(" ");
     const rest = words.slice(3).join(" ");
@@ -192,7 +193,8 @@ export default function Home() {
       image: "/burner-1.jpg",
     },
   ];
-  const [activeProductIdx, setActiveProductIdx] = useState(2);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_activeProductIdx, _setActiveProductIdx] = useState(2);
   // Limit thumbnail options to these products and preserve order
   const productOptionKeys = [
     "vilep-100",
@@ -213,7 +215,8 @@ export default function Home() {
     "boiler-combo3",
     "boiler-burners",
   ] as const;
-  const productOptionIdxs = productOptionKeys
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _productOptionIdxs = productOptionKeys
     .map((k) => products.findIndex((p) => p.key === k))
     .filter((i) => i >= 0);
 
@@ -535,7 +538,7 @@ export default function Home() {
               {/* CEO Message Box */}
               <div className="flex-1 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 relative">
                 <div className="absolute -left-4 top-12 w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-r-white/95 border-b-[20px] border-b-transparent"></div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">CEO's Message</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">CEO&apos;s Message</h3>
                 <p className="text-gray-700 leading-relaxed">
                   At Innovative Integrated Solutions, we are committed to delivering excellence across all our business verticals. Our mission is to provide comprehensive solutions that drive sustainable growth and create lasting value for our clients. Through innovation, dedication, and a customer-centric approach, we continue to expand our reach and impact across construction, engineering, chemical supply, machinery, architecture, international trade, and sustainability initiatives.
                 </p>
@@ -562,9 +565,9 @@ export default function Home() {
               {/* Director Message Box */}
               <div className="flex-1 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 relative">
                 <div className="absolute -right-4 top-12 w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-l-white/95 border-b-[20px] border-b-transparent"></div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Director's Message</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Director&apos;s Message</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Our team's expertise spans multiple industries, enabling us to offer integrated solutions that address complex business challenges. We believe in building strong partnerships, fostering innovation, and maintaining the highest standards of quality and service. Together, we are shaping the future of business across diverse sectors, creating opportunities for growth and sustainable development.
+                  Our team&apos;s expertise spans multiple industries, enabling us to offer integrated solutions that address complex business challenges. We believe in building strong partnerships, fostering innovation, and maintaining the highest standards of quality and service. Together, we are shaping the future of business across diverse sectors, creating opportunities for growth and sustainable development.
                 </p>
               </div>
             </div>

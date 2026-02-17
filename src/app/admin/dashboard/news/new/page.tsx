@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import AdminGuard from "@/components/AdminGuard";
 
 export default function NewNewsPage() {
@@ -181,11 +182,13 @@ export default function NewNewsPage() {
                 <p className="mt-2 text-sm text-gray-600">Uploading...</p>
               )}
               {(previewImage || formData.bannerImage) && (
-                <div className="mt-4">
-                  <img
+                <div className="mt-4 relative max-w-md h-48">
+                  <Image
                     src={previewImage || formData.bannerImage}
                     alt="Preview"
-                    className="max-w-md h-48 object-cover rounded-lg border border-gray-300"
+                    fill
+                    unoptimized
+                    className="object-cover rounded-lg border border-gray-300"
                   />
                 </div>
               )}

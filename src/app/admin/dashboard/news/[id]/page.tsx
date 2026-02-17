@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import AdminGuard from "@/components/AdminGuard";
 
 interface NewsArticle {
@@ -33,10 +34,6 @@ export default function EditNewsPage() {
   });
   const [previewImage, setPreviewImage] = useState<string>("");
 
-  useEffect(() => {
-    fetchArticle();
-  }, [id]);
-
   const fetchArticle = async () => {
     try {
       const response = await fetch("/api/admin/news");
@@ -58,6 +55,10 @@ export default function EditNewsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchArticle();
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -223,11 +224,13 @@ export default function EditNewsPage() {
                 Banner Image
               </label>
               {previewImage && (
-                <div className="mb-4">
-                  <img
+                <div className="mb-4 relative max-w-md h-48">
+                  <Image
                     src={previewImage}
                     alt="Current banner"
-                    className="max-w-md h-48 object-cover rounded-lg border border-gray-300"
+                    fill
+                    unoptimized
+                    className="object-cover rounded-lg border border-gray-300"
                   />
                 </div>
               )}

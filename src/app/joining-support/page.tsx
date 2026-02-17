@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import { useI18n } from "@/components/I18nProvider";
 
 export default function JoiningSupport() {
