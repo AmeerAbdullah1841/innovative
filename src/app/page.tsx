@@ -23,11 +23,13 @@ export default function Home() {
   const [newsLoading, setNewsLoading] = useState(true);
   const [newsIndex, setNewsIndex] = useState(0);
   const [teamIndex, setTeamIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(1);
+  const [teamItemsPerView, setTeamItemsPerView] = useState(2);
 
   const slides: Slide[] = [
     { src: "/e1.jpg", title: t("hero_title_1"), description: t("hero_desc_1") },
-    { src: "/i2.jpg", title: t("hero_title_2"), description: t("hero_desc_2") },
-    { src: "/i10.jpg", title: t("hero_title_3"), description: t("hero_desc_3") },
+    { src: "/i10.jpg", title: t("hero_title_2"), description: t("hero_desc_2") },
+    { src: "/i2.jpg", title: t("hero_title_3"), description: t("hero_desc_3") },
     { src: "/i4.jpg", title: t("hero_title_4"), description: t("hero_desc_4") },
   ];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -225,6 +227,27 @@ export default function Home() {
     return () => clearInterval(id);
   }, [slides.length]);
 
+  // Handle responsive items per view
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setItemsPerView(1); // Mobile: 1 item
+        setTeamItemsPerView(2); // Mobile: 2 team members
+      } else if (width < 1024) {
+        setItemsPerView(2); // Tablet: 2 items
+        setTeamItemsPerView(3); // Tablet: 3 team members
+      } else {
+        setItemsPerView(3); // Desktop: 3 items
+        setTeamItemsPerView(5); // Desktop: 5 team members
+      }
+    };
+
+    updateItemsPerView();
+    window.addEventListener('resize', updateItemsPerView);
+    return () => window.removeEventListener('resize', updateItemsPerView);
+  }, []);
+
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -380,40 +403,43 @@ export default function Home() {
           <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl h-full px-6 py-10 text-slate-900 flex flex-col">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 text-white text-center">{t("news_center_title")}</h3>
+        <div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 py-6 sm:py-10 text-slate-900 flex flex-col">
+          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 md:mb-8 text-white text-center">{t("news_center_title")}</h3>
           
           {newsLoading ? (
             <div className="flex items-center justify-center flex-1">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-                <p className="mt-4 text-white text-sm">Loading news...</p>
+                <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-white mx-auto"></div>
+                <p className="mt-4 text-white text-xs sm:text-sm">Loading news...</p>
               </div>
             </div>
           ) : news.length === 0 ? (
             <div className="flex items-center justify-center flex-1">
               <div className="text-center">
-                <p className="text-white text-lg">No news articles available</p>
+                <p className="text-white text-sm sm:text-base md:text-lg">No news articles available</p>
               </div>
             </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center">
+            <div className="flex-1 flex flex-col items-center justify-center w-full">
               {/* News Carousel */}
-              <div className="relative w-full max-w-7xl px-8">
-                <div className="relative overflow-hidden rounded-xl">
+              <div className="relative w-full max-w-7xl px-2 sm:px-4 md:px-6 lg:px-8">
+                <div className="relative overflow-hidden rounded-lg sm:rounded-xl">
                   <div 
                     className="flex transition-transform duration-500 ease-in-out"
-                    style={{ transform: `translateX(-${newsIndex * 33.333}%)` }}
+                    style={{ transform: `translateX(-${newsIndex * (100 / itemsPerView)}%)` }}
                   >
                     {news.map((article) => (
                       <div
                         key={article.id}
-                        className="w-full flex-shrink-0 px-4"
-                        style={{ minWidth: '33.333%', maxWidth: '33.333%' }}
+                        className="w-full flex-shrink-0 px-2 sm:px-3 md:px-4"
+                        style={{ 
+                          minWidth: `${100 / itemsPerView}%`, 
+                          maxWidth: `${100 / itemsPerView}%` 
+                        }}
                       >
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
+                        <div className="bg-white rounded-lg sm:rounded-xl shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
                           {/* Banner Image */}
-                          <div className="relative h-64 w-full">
+                          <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 w-full">
                             {article.bannerImage ? (
                               <Image
                                 src={article.bannerImage}
@@ -431,26 +457,26 @@ export default function Home() {
                                 className="object-cover"
                               />
                             )}
-                            <div className="absolute top-3 left-3">
-                              <span className="bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded uppercase">
+                            <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                              <span className="bg-red-600 text-white text-[10px] sm:text-xs font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase">
                                 News
                               </span>
                             </div>
                           </div>
                           
                           {/* Content */}
-                          <div className="p-8 flex-1 flex flex-col">
-                            <div className="text-sm text-gray-500 mb-3">
+                          <div className="p-4 sm:p-6 md:p-8 flex-1 flex flex-col">
+                            <div className="text-xs sm:text-sm text-gray-500 mb-2 sm:mb-3">
                               {new Date(article.date).toLocaleDateString('en-US', { 
                                 year: 'numeric', 
                                 month: 'long', 
                                 day: 'numeric' 
                               })}
                             </div>
-                            <h4 className="text-xl font-semibold text-gray-900 mb-4 line-clamp-2">
+                            <h4 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 md:mb-4 line-clamp-2">
                               {article.title}
                             </h4>
-                            <p className="text-base text-gray-600 line-clamp-4 flex-1">
+                            <p className="text-sm sm:text-base text-gray-600 line-clamp-3 sm:line-clamp-4 flex-1">
                               {article.excerpt}
                             </p>
                           </div>
@@ -461,29 +487,29 @@ export default function Home() {
                 </div>
 
                 {/* Navigation Arrows */}
-                {news.length > 3 && (
+                {news.length > itemsPerView && (
                   <>
                     <button
                       onClick={() => {
-                        const maxIndex = Math.ceil(news.length / 3) - 1;
+                        const maxIndex = Math.ceil(news.length / itemsPerView) - 1;
                         setNewsIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
                       }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
+                      className="absolute left-0 sm:left-2 md:left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all z-10"
                       aria-label="Previous news"
                     >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
                     </button>
                     <button
                       onClick={() => {
-                        const maxIndex = Math.ceil(news.length / 3) - 1;
+                        const maxIndex = Math.ceil(news.length / itemsPerView) - 1;
                         setNewsIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
                       }}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
+                      className="absolute right-0 sm:right-2 md:right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all z-10"
                       aria-label="Next news"
                     >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
@@ -492,14 +518,14 @@ export default function Home() {
               </div>
 
               {/* Carousel Indicators */}
-              {news.length > 3 && (
-                <div className="flex items-center justify-center gap-2 mt-8">
-                  {Array.from({ length: Math.ceil(news.length / 3) }).map((_, idx) => (
+              {news.length > itemsPerView && (
+                <div className="flex items-center justify-center gap-2 mt-4 sm:mt-6 md:mt-8">
+                  {Array.from({ length: Math.ceil(news.length / itemsPerView) }).map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setNewsIndex(idx)}
-                      className={`h-2 rounded-full transition-all ${
-                        newsIndex === idx ? 'bg-white w-8' : 'bg-white/50 w-2'
+                      className={`h-1.5 sm:h-2 rounded-full transition-all ${
+                        newsIndex === idx ? 'bg-white w-6 sm:w-8' : 'bg-white/50 w-1.5 sm:w-2'
                       }`}
                       aria-label={`Go to page ${idx + 1}`}
                     />
@@ -547,11 +573,11 @@ export default function Home() {
           </div>
 
           {/* Director Message */}
-          <div className="mb-16">
-            <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12">
+          <div className="mb-8 sm:mb-12 md:mb-16">
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
               {/* Director Image */}
-              <div className="flex-shrink-0">
-                <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-xl ring-4 ring-white">
+              <div className="flex-shrink-0 w-full sm:w-auto">
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden shadow-xl ring-2 sm:ring-4 ring-white mx-auto sm:mx-0">
                   <Image
                     src="/director.jpg"
                     alt="Director"
@@ -563,10 +589,11 @@ export default function Home() {
               </div>
               
               {/* Director Message Box */}
-              <div className="flex-1 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 relative">
-                <div className="absolute -right-4 top-12 w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-l-white/95 border-b-[20px] border-b-transparent"></div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Director&apos;s Message</h3>
-                <p className="text-gray-700 leading-relaxed">
+              <div className="flex-1 w-full bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 relative">
+                {/* Arrow pointer - hidden on mobile, visible on desktop */}
+                <div className="hidden lg:block absolute -right-4 top-12 w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-l-white/95 border-b-[20px] border-b-transparent"></div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">Director&apos;s Message</h3>
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                   Our team&apos;s expertise spans multiple industries, enabling us to offer integrated solutions that address complex business challenges. We believe in building strong partnerships, fostering innovation, and maintaining the highest standards of quality and service. Together, we are shaping the future of business across diverse sectors, creating opportunities for growth and sustainable development.
                 </p>
               </div>
@@ -574,13 +601,13 @@ export default function Home() {
           </div>
 
           {/* Team Members Carousel */}
-          <div className="mt-20">
-            <h3 className="text-3xl font-bold text-center text-white mb-12">Our Team</h3>
-            <div className="relative max-w-6xl mx-auto">
+          <div className="mt-12 sm:mt-16 md:mt-20">
+            <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-6 sm:mb-8 md:mb-12">Our Team</h3>
+            <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
               <div className="relative overflow-hidden">
                 <div 
                   className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${teamIndex * 20}%)` }}
+                  style={{ transform: `translateX(-${teamIndex * (100 / teamItemsPerView)}%)` }}
                 >
                   {[
                     { name: "", image: "/te1.jpg" },
@@ -594,11 +621,11 @@ export default function Home() {
                   ].map((member, idx) => (
                     <div
                       key={idx}
-                      className="flex-shrink-0 px-4"
-                      style={{ width: '20%', minWidth: '20%' }}
+                      className="flex-shrink-0 px-2 sm:px-3 md:px-4"
+                      style={{ width: `${100 / teamItemsPerView}%`, minWidth: `${100 / teamItemsPerView}%` }}
                     >
                       <div className="flex flex-col items-center">
-                        <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-lg ring-4 ring-white mb-4 hover:scale-110 transition-transform">
+                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg ring-2 sm:ring-3 md:ring-4 ring-white mb-2 sm:mb-3 md:mb-4 hover:scale-110 transition-transform">
                           <Image
                             src={member.image}
                             alt={member.name}
@@ -607,7 +634,7 @@ export default function Home() {
                             className="object-cover"
                           />
                         </div>
-                        <p className="text-sm font-medium text-gray-700 text-center">{member.name}</p>
+                        <p className="text-xs sm:text-sm font-medium text-gray-700 text-center">{member.name}</p>
                       </div>
                     </div>
                   ))}
@@ -615,30 +642,34 @@ export default function Home() {
               </div>
 
               {/* Team Carousel Navigation */}
-              <button
-                onClick={() => {
-                  const maxIndex = 8 - 5; // 8 members, show 5 at a time
-                  setTeamIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
-                }}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-gray-100 text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
-                aria-label="Previous team"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                onClick={() => {
-                  const maxIndex = 8 - 5;
-                  setTeamIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
-                }}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-gray-100 text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
-                aria-label="Next team"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+              {8 > teamItemsPerView && (
+                <>
+                  <button
+                    onClick={() => {
+                      const maxIndex = 8 - teamItemsPerView;
+                      setTeamIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
+                    }}
+                    className="absolute left-0 sm:-left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-900 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all z-10"
+                    aria-label="Previous team"
+                  >
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => {
+                      const maxIndex = 8 - teamItemsPerView;
+                      setTeamIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
+                    }}
+                    className="absolute right-0 sm:-right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 text-gray-900 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all z-10"
+                    aria-label="Next team"
+                  >
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
