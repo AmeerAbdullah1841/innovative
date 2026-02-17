@@ -75,5 +75,16 @@
     "featured": false,
     "createdAt": "2026-02-17T08:57:55.433Z",
     "updatedAt": "2026-02-17T08:57:55.433Z"
+  },
+  {
+    "id": "17713422477682xejfeh",
+    "title": "ceo visit",
+    "excerpt": "ceo surprise visit",
+    "content": "",
+    "date": "2026-02-18",
+    "bannerImage": "/uploads/news/1771342245084-fprhksdhpdf.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T15:30:47.768Z",
+    "updatedAt": "2026-02-17T15:30:47.768Z"
   }
 ]

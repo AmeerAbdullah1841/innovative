@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { put } from '@vercel/blob';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
@@ -45,31 +46,43 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads', 'news');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
     // Generate unique filename
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 15);
     const fileExtension = file.name.split('.').pop();
     const fileName = `${timestamp}-${randomString}.${fileExtension}`;
-    const filePath = join(uploadsDir, fileName);
 
-    // Convert file to buffer and save
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(filePath, buffer);
+    // Use Vercel Blob Storage in production, local filesystem in development
+    if (process.env.VERCEL || process.env.BLOB_READ_WRITE_TOKEN) {
+      // Production: Upload to Vercel Blob Storage
+      const blob = await put(`news/${fileName}`, file, {
+        access: 'public',
+        contentType: file.type,
+      });
 
-    // Return the public URL
-    const publicUrl = `/uploads/news/${fileName}`;
+      return NextResponse.json(
+        { url: blob.url, fileName: blob.pathname },
+        { status: 200 }
+      );
+    } else {
+      // Development: Save to local filesystem
+      const uploadsDir = join(process.cwd(), 'public', 'uploads', 'news');
+      if (!existsSync(uploadsDir)) {
+        await mkdir(uploadsDir, { recursive: true });
+      }
 
-    return NextResponse.json(
-      { url: publicUrl, fileName },
-      { status: 200 }
-    );
+      const filePath = join(uploadsDir, fileName);
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      await writeFile(filePath, buffer);
+
+      const publicUrl = `/uploads/news/${fileName}`;
+
+      return NextResponse.json(
+        { url: publicUrl, fileName },
+        { status: 200 }
+      );
+    }
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json(
