@@ -52,41 +52,86 @@ export async function POST(request: NextRequest) {
     const fileExtension = file.name.split('.').pop();
     const fileName = `${timestamp}-${randomString}.${fileExtension}`;
 
-    // Use Vercel Blob Storage in production, local filesystem in development
-    if (process.env.VERCEL || process.env.BLOB_READ_WRITE_TOKEN) {
-      // Production: Upload to Vercel Blob Storage
-      const blob = await put(`news/${fileName}`, file, {
-        access: 'public',
-        contentType: file.type,
-      });
+    // Check if we're on Vercel and have blob token configured
+    const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+    const isVercel = process.env.VERCEL === '1';
 
-      return NextResponse.json(
-        { url: blob.url, fileName: blob.pathname },
-        { status: 200 }
-      );
-    } else {
-      // Development: Save to local filesystem
-      const uploadsDir = join(process.cwd(), 'public', 'uploads', 'news');
-      if (!existsSync(uploadsDir)) {
-        await mkdir(uploadsDir, { recursive: true });
+    // Try Vercel Blob Storage first if on Vercel
+    if (isVercel) {
+      if (!blobToken) {
+        return NextResponse.json(
+          { 
+            error: 'Blob storage not configured',
+            message: 'BLOB_READ_WRITE_TOKEN environment variable is required for file uploads on Vercel.',
+            instruction: 'Please set BLOB_READ_WRITE_TOKEN in Vercel Dashboard → Settings → Environment Variables'
+          },
+          { status: 500 }
+        );
       }
 
-      const filePath = join(uploadsDir, fileName);
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      await writeFile(filePath, buffer);
+      try {
+        // Production: Upload to Vercel Blob Storage
+        // The put function automatically reads BLOB_READ_WRITE_TOKEN from env
+        const blob = await put(`news/${fileName}`, file, {
+          access: 'public',
+          contentType: file.type,
+        });
 
-      const publicUrl = `/uploads/news/${fileName}`;
+        return NextResponse.json(
+          { url: blob.url, fileName: blob.pathname },
+          { status: 200 }
+        );
+      } catch (blobError: unknown) {
+        console.error('Blob storage error:', blobError);
+        const errorMessage = blobError instanceof Error ? blobError.message : 'Unknown blob storage error';
+        return NextResponse.json(
+          { 
+            error: 'Failed to upload to blob storage',
+            message: errorMessage,
+            details: 'Check Vercel function logs for more details'
+          },
+          { status: 500 }
+        );
+      }
+    } else {
+      // Development: Save to local filesystem
+      try {
+        const uploadsDir = join(process.cwd(), 'public', 'uploads', 'news');
+        if (!existsSync(uploadsDir)) {
+          await mkdir(uploadsDir, { recursive: true });
+        }
 
-      return NextResponse.json(
-        { url: publicUrl, fileName },
-        { status: 200 }
-      );
+        const filePath = join(uploadsDir, fileName);
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+        await writeFile(filePath, buffer);
+
+        const publicUrl = `/uploads/news/${fileName}`;
+
+        return NextResponse.json(
+          { url: publicUrl, fileName },
+          { status: 200 }
+        );
+      } catch (fsError: unknown) {
+        console.error('Filesystem error:', fsError);
+        const errorMessage = fsError instanceof Error ? fsError.message : 'Unknown filesystem error';
+        return NextResponse.json(
+          { 
+            error: 'Failed to save file',
+            message: errorMessage
+          },
+          { status: 500 }
+        );
+      }
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Upload error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to upload file' },
+      { 
+        error: 'Failed to upload file',
+        details: errorMessage
+      },
       { status: 500 }
     );
   }

@@ -86,5 +86,16 @@
     "featured": false,
     "createdAt": "2026-02-17T15:30:47.768Z",
     "updatedAt": "2026-02-17T15:30:47.768Z"
+  },
+  {
+    "id": "1771343082131rpbbpdb",
+    "title": "ai",
+    "excerpt": "ai new",
+    "content": "",
+    "date": "2026-02-20",
+    "bannerImage": "/uploads/news/1771343080620-4rn50t0gcrx.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T15:44:42.131Z",
+    "updatedAt": "2026-02-17T15:44:42.131Z"
   }
 ]

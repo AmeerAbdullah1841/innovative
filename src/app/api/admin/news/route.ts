@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { isAuthenticated } from '@/lib/auth';
+import { put, list } from '@vercel/blob';
 
 export const dynamic = 'force-dynamic';
 
 const NEWS_FILE_PATH = join(process.cwd(), 'data', 'news.json');
+const NEWS_BLOB_PATH = 'news/data.json';
 
 interface NewsArticle {
   id: string;
@@ -22,22 +24,67 @@ interface NewsArticle {
 
 async function readNewsFile(): Promise<NewsArticle[]> {
   try {
-    if (!existsSync(NEWS_FILE_PATH)) {
-      return [];
+    const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+    const isVercel = process.env.VERCEL === '1';
+
+    if (blobToken && isVercel) {
+      // Production: Read from Vercel Blob Storage
+      try {
+        // Try to get the blob URL by constructing it
+        // First, try to list and find the blob
+        const blobList = await list({ prefix: 'news/' });
+        const newsBlob = blobList.blobs.find(blob => blob.pathname === NEWS_BLOB_PATH);
+        
+        if (newsBlob) {
+          const response = await fetch(newsBlob.url);
+          if (response.ok) {
+            const data = await response.json();
+            return Array.isArray(data) ? data : [];
+          }
+        }
+        return [];
+      } catch (blobError) {
+        console.error('Error reading from blob storage:', blobError);
+        // If blob doesn't exist yet, return empty array (first time)
+        return [];
+      }
+    } else {
+      // Development: Read from local file
+      if (!existsSync(NEWS_FILE_PATH)) {
+        return [];
+      }
+      const fileContent = await readFile(NEWS_FILE_PATH, 'utf-8');
+      return JSON.parse(fileContent);
     }
-    const fileContent = await readFile(NEWS_FILE_PATH, 'utf-8');
-    return JSON.parse(fileContent);
   } catch (error) {
-    console.error('Error reading news file:', error);
+    console.error('Error reading news:', error);
     return [];
   }
 }
 
 async function writeNewsFile(news: NewsArticle[]): Promise<void> {
   try {
-    await writeFile(NEWS_FILE_PATH, JSON.stringify(news, null, 2), 'utf-8');
+    const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+    const isVercel = process.env.VERCEL === '1';
+
+    if (blobToken && isVercel) {
+      // Production: Write to Vercel Blob Storage
+      const jsonContent = JSON.stringify(news, null, 2);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+      await put(NEWS_BLOB_PATH, blob, {
+        access: 'public',
+        contentType: 'application/json',
+      });
+    } else {
+      // Development: Write to local file
+      const dataDir = join(process.cwd(), 'data');
+      if (!existsSync(dataDir)) {
+        await mkdir(dataDir, { recursive: true });
+      }
+      await writeFile(NEWS_FILE_PATH, JSON.stringify(news, null, 2), 'utf-8');
+    }
   } catch (error) {
-    console.error('Error writing news file:', error);
+    console.error('Error writing news:', error);
     throw error;
   }
 }
@@ -108,10 +155,14 @@ export async function POST(request: NextRequest) {
     await writeNewsFile(news);
 
     return NextResponse.json(newArticle, { status: 201 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error creating news:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to create news article' },
+      { 
+        error: 'Failed to create news article',
+        details: errorMessage
+      },
       { status: 500 }
     );
   }
@@ -163,10 +214,14 @@ export async function PUT(request: NextRequest) {
     await writeNewsFile(news);
 
     return NextResponse.json(news[articleIndex], { status: 200 });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error updating news:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to update news article' },
+      { 
+        error: 'Failed to update news article',
+        details: errorMessage
+      },
       { status: 500 }
     );
   }
@@ -209,10 +264,14 @@ export async function DELETE(request: NextRequest) {
       { message: 'Article deleted successfully' },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error deleting news:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to delete news article' },
+      { 
+        error: 'Failed to delete news article',
+        details: errorMessage
+      },
       { status: 500 }
     );
   }
