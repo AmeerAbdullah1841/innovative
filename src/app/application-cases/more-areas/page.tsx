@@ -25,35 +25,29 @@ export default function MoreAreasPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{t("ac_hero_title")}</h1>
         </div>
 
-        {/* Application Categories Tabs */}
+        {/* Business Cases Categories Tabs */}
         <div className="bg-black rounded-2xl shadow-xl p-6 mb-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            <Link href="/application-cases/leachate-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_leachate")}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            <Link href="/application-cases/construction-engineering" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_construction")}
             </Link>
-            <Link href="/application-cases/municipal-sector" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_municipal")}
+            <Link href="/application-cases/chemical-supply" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_chemical")}
             </Link>
-            <Link href="/application-cases/printing-dyeing-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_printing")}
+            <Link href="/application-cases/machinery-equipment" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_machinery")}
             </Link>
-            <Link href="/application-cases/coal-chemical-petrochemical" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_coal")}
+            <Link href="/application-cases/architecture-designs" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_architecture")}
             </Link>
-            <Link href="/application-cases/steel-nonferrous-metals" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_steel")}
+            <Link href="/application-cases/import-export" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_import")}
             </Link>
-            <Link href="/application-cases/seawater-desalination-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_seawater")}
+            <Link href="/application-cases/general-trading" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_trading")}
             </Link>
-            <Link href="/application-cases/electronic-electroplating-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_electronic")}
-            </Link>
-            <Link href="/application-cases/drinking-water-field" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
-              {t("ac_drinking")}
-            </Link>
-            <Link href="/application-cases/more-areas" className="px-4 py-2 text-sm text-black bg-white rounded-lg font-semibold">
-              {t("ac_more")}
+            <Link href="/application-cases/sustainability-esg" className="px-4 py-2 text-sm text-white hover:bg-white hover:text-black rounded-lg transition-colors">
+              {t("ac_sustainability")}
             </Link>
           </div>
         </div>

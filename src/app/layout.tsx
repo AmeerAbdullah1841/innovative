@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { I18nProvider } from "@/components/I18nProvider";
 
 export const metadata: Metadata = {
-  title: "Sustonix",
+  title: "Innovative Integrated Solutions",
   description: "Sustainable solutions, engineered for impact.",
   icons: {
     icon: [

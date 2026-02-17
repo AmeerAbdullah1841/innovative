@@ -8,7 +8,7 @@ export default function ApplicationCasesPage() {
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0">
-        <Image src="/case-1.jpg" alt="Background" fill className="object-cover" priority />
+        <Image src="/w.jpg" alt="Background" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-black/10" />
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -26,35 +26,29 @@ export default function ApplicationCasesPage() {
           </p>
         </div>
 
-        {/* Application Categories */}
+        {/* Business Cases Categories */}
         <div className="bg-gray-800 rounded-2xl shadow-xl p-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            <Link href="/application-cases/leachate-field" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_leachate")}</div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            <Link href="/application-cases/construction-engineering" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_construction")}</div>
             </Link>
-            <Link href="/application-cases/municipal-sector" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_municipal")}</div>
+            <Link href="/application-cases/chemical-supply" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_chemical")}</div>
             </Link>
-            <Link href="/application-cases/printing-dyeing-field" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_printing")}</div>
+            <Link href="/application-cases/machinery-equipment" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_machinery")}</div>
             </Link>
-            <Link href="/application-cases/coal-chemical-petrochemical" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_coal")}</div>
+            <Link href="/application-cases/architecture-designs" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_architecture")}</div>
             </Link>
-            <Link href="/application-cases/steel-nonferrous-metals" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_steel")}</div>
+            <Link href="/application-cases/import-export" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_import")}</div>
             </Link>
-            <Link href="/application-cases/seawater-desalination-field" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_seawater")}</div>
+            <Link href="/application-cases/general-trading" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_trading")}</div>
             </Link>
-            <Link href="/application-cases/electronic-electroplating-field" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_electronic")}</div>
-            </Link>
-            <Link href="/application-cases/drinking-water-field" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_drinking")}</div>
-            </Link>
-            <Link href="/application-cases/more-areas" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
-              <div className="text-sm font-medium font-semibold">{t("ac_more")}</div>
+            <Link href="/application-cases/sustainability-esg" className="p-4 text-center hover:bg-white hover:text-black text-white rounded-lg transition-colors">
+              <div className="text-sm font-medium font-semibold">{t("ac_sustainability")}</div>
             </Link>
           </div>
         </div>

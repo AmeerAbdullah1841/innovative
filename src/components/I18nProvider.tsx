@@ -15,8 +15,10 @@ const COOKIE_NAME = "lang";
 
 export function I18nProvider({ children, initialLang }: { children: React.ReactNode; initialLang?: Lang }) {
   const [lang, setLangState] = useState<Lang>(initialLang || ("en" as Lang));
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // try localStorage
     try {
       const stored = localStorage.getItem(COOKIE_NAME) as Lang | null;

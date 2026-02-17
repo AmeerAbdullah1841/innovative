@@ -5,17 +5,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { useI18n } from "@/components/I18nProvider";
 
+interface NewsArticle {
+  id: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  bannerImage?: string;
+  featured: boolean;
+}
+
 type Slide = { src: string; title: string; description: string };
 
 export default function Home() {
   const { t } = useI18n();
   const [index, setIndex] = useState(0);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [newsIndex, setNewsIndex] = useState(0);
+  const [teamIndex, setTeamIndex] = useState(0);
 
   const slides: Slide[] = [
-    { src: "/back.jpg", title: t("hero_title_1"), description: t("hero_desc_1") },
-    { src: "/about.jpg", title: t("hero_title_2"), description: t("hero_desc_2") },
-    { src: "/water.jpg", title: t("hero_title_3"), description: t("hero_desc_3") },
-    { src: "/global.jpg", title: t("hero_title_4"), description: t("hero_desc_4") },
+    { src: "/e1.jpg", title: t("hero_title_1"), description: t("hero_desc_1") },
+    { src: "/i2.jpg", title: t("hero_title_2"), description: t("hero_desc_2") },
+    { src: "/i10.jpg", title: t("hero_title_3"), description: t("hero_desc_3") },
+    { src: "/i4.jpg", title: t("hero_title_4"), description: t("hero_desc_4") },
   ];
   const formatName = (name: string) => {
     const words = name.split(" ").filter(Boolean);
@@ -209,6 +222,45 @@ export default function Home() {
     return () => clearInterval(id);
   }, [slides.length]);
 
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch("/api/admin/news", {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        // Check if response is OK
+        if (!response.ok) {
+          console.warn(`News API returned status ${response.status}`);
+          setNews([]);
+          return;
+        }
+        
+        // Check content type
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          console.warn("News API returned non-JSON response");
+          setNews([]);
+          return;
+        }
+        
+        const data = await response.json();
+        // Handle both array and object with news property
+        const newsArray = Array.isArray(data) ? data : (data.news || []);
+        setNews(newsArray);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        // Fallback to empty array if API fails
+        setNews([]);
+      } finally {
+        setNewsLoading(false);
+      }
+    };
+    fetchNews();
+  }, []);
+
   return (
     <div className="relative flex flex-col">
       {/* HERO (full viewport) slider */}
@@ -253,8 +305,8 @@ export default function Home() {
       {/* Stats section ,  decades of industry development*/}
       <section className="relative z-10 w-full h-screen overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/industry.jpg" alt="Background" fill unoptimized className="object-cover" />
-          <div className="absolute inset-0 bg-blue-900/40" />
+          <Image src="/cr3.jpg" alt="Background" fill unoptimized className="object-cover" />
+          <div className="absolute inset-0 bg-black-900/50" />
         </div>
         <div className="relative mx-auto max-w-6xl h-full px-6 py-8 text-white flex flex-col justify-center transform -translate-y-12 sm:-translate-y-16 md:-translate-y-20 lg:-translate-y-24">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold">{t("stats_heading")}</h3>
@@ -281,75 +333,12 @@ export default function Home() {
       </section>
 
       {/* Product highlight section */}
-      <section className="relative w-full min-h-screen overflow-hidden">
-        {/* Background image layer */}
-        <div className="absolute inset-0">
-          <Image src="/grey-2.jpg" alt="Section background" fill unoptimized className="object-cover" />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-        <div className="relative z-10 mx-auto max-w-6xl h-full px-6 pt-8 md:py-8 grid gap-8 md:grid-cols-2 items-center text-white">
-          <div>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold">{products[activeProductIdx].name}</h3>
-            <p className="mt-4 opacity-90">{products[activeProductIdx].blurb}</p>
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
-              {(products[activeProductIdx].stats || []).map((s) => (
-                <div key={s.label} className="rounded-lg border border-white/20 bg-white/10 backdrop-blur p-4">
-                  <div className="text-xl font-bold">{s.value}</div>
-                  <div className="opacity-80">{t(
-                    s.label === "Nominal area (m²)"
-                      ? "product_stat_nominal_area"
-                      : s.label === "Pore size"
-                      ? "product_stat_pore_size"
-                      : s.label === "Energy"
-                      ? "product_stat_energy"
-                      : s.label
-                  )}</div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 flex gap-4">
-              <Link href={products[activeProductIdx].href as string} className="inline-flex items-center rounded-full bg-white px-5 py-2 text-black text-sm font-medium hover:bg-gray-200">{t("cta_learn_more")}</Link>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="relative w-full h-64 sm:h-80 md:h-[420px] md:max-h-[420px]">
-              <Image src={products[activeProductIdx].image} alt={products[activeProductIdx].name} fill unoptimized className="rounded-xl shadow-lg object-cover" />
-            </div>
-          </div>
-        </div>
-
-        <div className="z-10 inset-x-0 md:absolute md:bottom-20 px-6 mt-6 md:mt-0">
-          <div className="mx-auto max-w-6xl flex items-center gap-6 overflow-x-auto text-white rounded-xl bg-black/30 backdrop-blur p-3 md:bg-transparent md:p-0">
-            {productOptionIdxs.map((idx) => {
-              const p = products[idx];
-              const isActive = idx === activeProductIdx;
-              return (
-                <div key={p.key} className="flex flex-col items-center gap-2 shrink-0">
-                  <button
-                    onClick={() => setActiveProductIdx(idx)}
-                    onMouseEnter={() => setActiveProductIdx(idx)}
-                    onFocus={() => setActiveProductIdx(idx)}
-                    className={`group relative h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full overflow-hidden border ${
-                      isActive ? "border-white" : "border-white/40"
-                    }`}
-                    aria-label={`View ${p.name}`}
-                  >
-                    <Image src={p.image} alt={p.name} fill unoptimized className="object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </button>
-                  <div className="text-[10px] sm:text-xs text-white text-center leading-tight">{formatName(p.name)}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
+     
       {/* Fields grid section */}
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0">
-          <Image src="/grey.jpg" alt="Fields background" fill unoptimized className="object-cover" />
+          <Image src="/building.jpg" alt="Fields background" fill unoptimized className="object-cover" />
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
@@ -357,14 +346,13 @@ export default function Home() {
           {/* <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6">Application fields</h3> */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-auto mb-auto">
             {[
-              { name: t("fields_leachate"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/e660a252-e2ac-4d08-a0af-84fb9753118a.png", href: "/application-cases/leachate-field" },
-              { name: t("fields_municipal"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6ee7a5cb-15ab-4c87-a960-fbb641c4a066.png" ,href: "/application-cases/municipal-sector"},
-              { name: t("fields_printing"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/18155a6f-5bac-4196-b0c2-2c2f312157e5.png_366xaf.png" ,href: "/application-cases/printing-dyeing-field"},
-              { name: t("fields_drinking"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/88e35543-64c8-46dd-b8f0-16f4b18dbbbd.png_366xaf.png" ,href: "/application-cases/drinking-water-field"},
-              { name: t("fields_more"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/4eecc184-9ec7-4631-a12c-ead0c9bde1e4.png_366xaf.png" ,href: "/application-cases/more-areas"},
-              { name: t("fields_coal"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/e1be20e3-953e-4a97-b85a-25847de3fd1a.png" ,href: "/application-cases/coal-chemical-petrochemical"},
-              { name: t("fields_electronic"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/fc08062e-4b72-4811-807d-4686a7622c3b.png" ,href: "/application-cases/electronic-electroplating-field"},
-              { name: t("fields_steel"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/f512574b-4223-43d7-9019-6d6ba4b35d30.png" ,href: "/application-cases/steel-nonferrous-metals"},
+              { name: t("fields_construction"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/e660a252-e2ac-4d08-a0af-84fb9753118a.png", href: "/application-cases/construction-engineering" },
+              { name: t("fields_chemical"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/6ee7a5cb-15ab-4c87-a960-fbb641c4a066.png" ,href: "/application-cases/chemical-supply"},
+              { name: t("fields_machinery"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/18155a6f-5bac-4196-b0c2-2c2f312157e5.png_366xaf.png" ,href: "/application-cases/machinery-equipment"},
+              { name: t("fields_architecture"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/88e35543-64c8-46dd-b8f0-16f4b18dbbbd.png_366xaf.png" ,href: "/application-cases/architecture-designs"},
+              { name: t("fields_import"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/4eecc184-9ec7-4631-a12c-ead0c9bde1e4.png_366xaf.png" ,href: "/application-cases/import-export"},
+              { name: t("fields_trading"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/e1be20e3-953e-4a97-b85a-25847de3fd1a.png" ,href: "/application-cases/general-trading"},
+              { name: t("fields_sustainability"), image: "https://omo-oss-image.thefastimg.com/portal-saas/new2024041015584165399/cms/image/fc08062e-4b72-4811-807d-4686a7622c3b.png" ,href: "/application-cases/sustainability-esg"},
             ].map((f) => (
               <div key={f.name} className="group relative rounded-xl overflow-hidden shadow-md ring-1 ring-white/10 transition-transform duration-300 hover:shadow-xl hover:ring-white/40 transform hover:-translate-y-1">
                 <div className="relative h-40 sm:h-48 md:h-56 w-full">
@@ -385,41 +373,269 @@ export default function Home() {
       <section className="relative w-full h-screen overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0">
-          <Image src="/grey-3.jpg" alt="News background" fill unoptimized className="object-cover" />
+          <Image src="/news-2.jpg" alt="News background" fill unoptimized className="object-cover" />
           <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl h-full px-6 py-10 text-slate-900 flex flex-col">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 text-white">{t("news_center_title")}</h3>
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6 flex-1">
-            {/* Left: Featured slider placeholder */}
-            <div className="relative rounded-xl overflow-hidden shadow ring-1 ring-black/10 bg-white/80">
-              <Image src="/news-2.jpg" alt="Featured" fill unoptimized className="object-cover opacity-90" />
-              <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent text-white">
-                <div className="text-sm uppercase tracking-wide">{t("featured")}</div>
-                <div className="mt-2 text-lg sm:text-xl font-semibold">{t("news_featured_title")}</div>
+        <div className="relative z-10 mx-auto max-w-7xl h-full px-6 py-10 text-slate-900 flex flex-col">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 text-white text-center">{t("news_center_title")}</h3>
+          
+          {newsLoading ? (
+            <div className="flex items-center justify-center flex-1">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+                <p className="mt-4 text-white text-sm">Loading news...</p>
               </div>
             </div>
+          ) : news.length === 0 ? (
+            <div className="flex items-center justify-center flex-1">
+              <div className="text-center">
+                <p className="text-white text-lg">No news articles available</p>
+              </div>
+            </div>
+          ) : (
+            <div className="flex-1 flex flex-col items-center justify-center">
+              {/* News Carousel */}
+              <div className="relative w-full max-w-7xl px-8">
+                <div className="relative overflow-hidden rounded-xl">
+                  <div 
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateX(-${newsIndex * 33.333}%)` }}
+                  >
+                    {news.map((article) => (
+                      <div
+                        key={article.id}
+                        className="w-full flex-shrink-0 px-4"
+                        style={{ minWidth: '33.333%', maxWidth: '33.333%' }}
+                      >
+                        <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col hover:shadow-xl transition-shadow">
+                          {/* Banner Image */}
+                          <div className="relative h-64 w-full">
+                            {article.bannerImage ? (
+                              <Image
+                                src={article.bannerImage}
+                                alt={article.title}
+                                fill
+                                unoptimized
+                                className="object-cover"
+                              />
+                            ) : (
+                              <Image
+                                src="/news-2.jpg"
+                                alt={article.title}
+                                fill
+                                unoptimized
+                                className="object-cover"
+                              />
+                            )}
+                            <div className="absolute top-3 left-3">
+                              <span className="bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded uppercase">
+                                News
+                              </span>
+                            </div>
+                          </div>
+                          
+                          {/* Content */}
+                          <div className="p-8 flex-1 flex flex-col">
+                            <div className="text-sm text-gray-500 mb-3">
+                              {new Date(article.date).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                              })}
+                            </div>
+                            <h4 className="text-xl font-semibold text-gray-900 mb-4 line-clamp-2">
+                              {article.title}
+                            </h4>
+                            <p className="text-base text-gray-600 line-clamp-4 flex-1">
+                              {article.excerpt}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            {/* Right: List */}
-            <div className="flex flex-col gap-4">
-              {[
-                { date: "2025-04-25", title: t("news1_title"), excerpt: t("news1_excerpt") },
-                { date: "2025-03-14", title: t("news2_title"), excerpt: t("news2_excerpt") },
-                { date: "2025-03-07", title: t("news3_title"), excerpt: t("news3_excerpt") },
-                { date: "2025-02-01", title: t("news4_title"), excerpt: t("news4_excerpt") },
-              ].map((n) => (
-                <Link key={n.title} href="#" className="group relative grid grid-cols-[auto_1fr] gap-4 items-start rounded-xl bg-black/90 ring-1 ring-black/10 p-4 hover:bg-white transition-colors">
-                  <div className="flex h-12 w-12 flex-col items-center justify-center rounded bg-white text-black text-xs group-hover:text-white group-hover:bg-black leading-tight">
-                    <div>{n.date.split("-")[1]}</div>
-                    <div className="text-[10px]">{n.date.split("-")[0]}</div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-white group-hover:text-black">{n.title}</div>
-                    <div className="mt-1 text-sm text-white group-hover:text-black line-clamp-2">{n.excerpt}</div>
-                  </div>
-                </Link>
-              ))}
+                {/* Navigation Arrows */}
+                {news.length > 3 && (
+                  <>
+                    <button
+                      onClick={() => {
+                        const maxIndex = Math.ceil(news.length / 3) - 1;
+                        setNewsIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
+                      }}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
+                      aria-label="Previous news"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => {
+                        const maxIndex = Math.ceil(news.length / 3) - 1;
+                        setNewsIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
+                      }}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
+                      aria-label="Next news"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Carousel Indicators */}
+              {news.length > 3 && (
+                <div className="flex items-center justify-center gap-2 mt-8">
+                  {Array.from({ length: Math.ceil(news.length / 3) }).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setNewsIndex(idx)}
+                      className={`h-2 rounded-full transition-all ${
+                        newsIndex === idx ? 'bg-white w-8' : 'bg-white/50 w-2'
+                      }`}
+                      aria-label={`Go to page ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Leadership & Team Section */}
+      <section className="relative w-full min-h-screen overflow-hidden py-16">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image src="/arc1.jpg" alt="Leadership background" fill unoptimized className="object-cover" />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-10">
+          {/* CEO Message */}
+          <div className="mb-16">
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+              {/* CEO Image */}
+              <div className="flex-shrink-0">
+                <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-xl ring-4 ring-white">
+                  <Image
+                    src="/ceo.jpg"
+                    alt="CEO"
+                    fill
+                    unoptimized
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              
+              {/* CEO Message Box */}
+              <div className="flex-1 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 relative">
+                <div className="absolute -left-4 top-12 w-0 h-0 border-t-[20px] border-t-transparent border-r-[20px] border-r-white/95 border-b-[20px] border-b-transparent"></div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">CEO's Message</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  At Innovative Integrated Solutions, we are committed to delivering excellence across all our business verticals. Our mission is to provide comprehensive solutions that drive sustainable growth and create lasting value for our clients. Through innovation, dedication, and a customer-centric approach, we continue to expand our reach and impact across construction, engineering, chemical supply, machinery, architecture, international trade, and sustainability initiatives.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Director Message */}
+          <div className="mb-16">
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-12">
+              {/* Director Image */}
+              <div className="flex-shrink-0">
+                <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-xl ring-4 ring-white">
+                  <Image
+                    src="/director.jpg"
+                    alt="Director"
+                    fill
+                    unoptimized
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              
+              {/* Director Message Box */}
+              <div className="flex-1 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 relative">
+                <div className="absolute -right-4 top-12 w-0 h-0 border-t-[20px] border-t-transparent border-l-[20px] border-l-white/95 border-b-[20px] border-b-transparent"></div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Director's Message</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Our team's expertise spans multiple industries, enabling us to offer integrated solutions that address complex business challenges. We believe in building strong partnerships, fostering innovation, and maintaining the highest standards of quality and service. Together, we are shaping the future of business across diverse sectors, creating opportunities for growth and sustainable development.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Team Members Carousel */}
+          <div className="mt-20">
+            <h3 className="text-3xl font-bold text-center text-white mb-12">Our Team</h3>
+            <div className="relative max-w-6xl mx-auto">
+              <div className="relative overflow-hidden">
+                <div 
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${teamIndex * 20}%)` }}
+                >
+                  {[
+                    { name: "", image: "/te1.jpg" },
+                    { name: "", image: "/te2.jpg" },
+                    { name: "", image: "/te3.jpg" },
+                    { name: "", image: "/t4.jpg" },
+                    { name: "", image: "/t5.jpg" },
+                    { name: "", image: "/t6.jpg" },
+                    { name: "", image: "/t7.jpg" },
+                    { name: "", image: "/t8.jpg" },
+                  ].map((member, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-shrink-0 px-4"
+                      style={{ width: '20%', minWidth: '20%' }}
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-lg ring-4 ring-white mb-4 hover:scale-110 transition-transform">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            unoptimized
+                            className="object-cover"
+                          />
+                        </div>
+                        <p className="text-sm font-medium text-gray-700 text-center">{member.name}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Team Carousel Navigation */}
+              <button
+                onClick={() => {
+                  const maxIndex = 8 - 5; // 8 members, show 5 at a time
+                  setTeamIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
+                }}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-gray-100 text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
+                aria-label="Previous team"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => {
+                  const maxIndex = 8 - 5;
+                  setTeamIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
+                }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-gray-100 text-gray-900 rounded-full p-3 shadow-lg transition-all z-10"
+                aria-label="Next team"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>

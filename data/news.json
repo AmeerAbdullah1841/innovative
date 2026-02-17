@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1771227180383e0rqp39",
+    "title": "Construction of Dam",
+    "excerpt": "To control the water flow",
+    "content": "to create electricity",
+    "date": "2026-02-28",
+    "bannerImage": "/uploads/news/1771242501773-hlst3jk5m.jpg",
+    "featured": true,
+    "createdAt": "2026-02-16T07:33:00.383Z",
+    "updatedAt": "2026-02-16T11:48:24.086Z"
+  },
+  {
+    "id": "17712294391998rxxyqv",
+    "title": "New Chemical Supply coming",
+    "excerpt": "Acetic acid to be produced",
+    "content": "",
+    "date": "2026-02-15",
+    "bannerImage": "/uploads/news/1771242574708-8rt6dk5or3v.jpg",
+    "featured": false,
+    "createdAt": "2026-02-16T08:10:39.199Z",
+    "updatedAt": "2026-02-16T11:49:36.252Z"
+  },
+  {
+    "id": "1771229988316vsoof3l",
+    "title": "Architecture & designs update",
+    "excerpt": "cubical design",
+    "content": "",
+    "date": "2026-02-07",
+    "bannerImage": "/uploads/news/1771242527041-fjz9z5ewm3q.jpg",
+    "featured": false,
+    "createdAt": "2026-02-16T08:19:48.316Z",
+    "updatedAt": "2026-02-16T11:49:02.404Z"
+  },
+  {
+    "id": "1771230040328wurj9g9",
+    "title": "Site inspection ",
+    "excerpt": "site clearance coming ",
+    "content": "",
+    "date": "2026-02-16",
+    "bannerImage": "/uploads/news/1771230014107-33syo9r4zm9.jpg",
+    "featured": false,
+    "createdAt": "2026-02-16T08:20:40.329Z",
+    "updatedAt": "2026-02-16T08:20:40.329Z"
+  },
+  {
+    "id": "1771318136084ja3sp8l",
+    "title": "AI",
+    "excerpt": "AI programs coming soon",
+    "content": "",
+    "date": "2026-02-19",
+    "bannerImage": "/uploads/news/1771318132367-5a04mfyomac.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T08:48:56.084Z",
+    "updatedAt": "2026-02-17T08:48:56.085Z"
+  },
+  {
+    "id": "1771318570341f6hdlbi",
+    "title": "loo",
+    "excerpt": "m[oo",
+    "content": "",
+    "date": "2026-02-17",
+    "bannerImage": "/uploads/news/1771318449536-5c80ai7c4ap.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T08:56:10.341Z",
+    "updatedAt": "2026-02-17T08:56:10.341Z"
+  },
+  {
+    "id": "1771318675433qjsdeyl",
+    "title": "water",
+    "excerpt": "laoip",
+    "content": "",
+    "date": "2026-02-17",
+    "bannerImage": "/uploads/news/1771318669377-a2y4qlxqq7i.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T08:57:55.433Z",
+    "updatedAt": "2026-02-17T08:57:55.433Z"
+  }
+]

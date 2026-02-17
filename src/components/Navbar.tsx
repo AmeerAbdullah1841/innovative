@@ -22,88 +22,20 @@ type NavItem = {
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "Product Center",
-    href: "/product-center",
-    description: "pc_desc",
-    image: "/about.jpg",
-    children: [
-      { 
-        label: "Product development", 
-        href: "",
-        children: [
-          { label: "1) Sumitomo Electric POREFLON film", href: "/product-center/sumitomo-electric-poreflon-film"  },
-          { label: "2) VILEP technology", href: "/product-center/product-development/vilep-technology" },
-        ]
-      },
-      { label: "MBR products", href: "",
-        children: [
-            { label: "1) ViLEP-100", href: "/product-center/mbr-products/vilep-10" },
-            { label: "2) VILEP-1000", href: "/product-center/mbr-products/vilep-1000" },
-          ]
-       },
-      { label: "Ultrafiltration products", href: "",
-        children: [
-          { label: "1) ViLEP-1500", href: "/product-center/ultrafiltration-products/vilep-1500" },
-          { label: "2) ViLEP-2000", href: "/product-center/ultrafiltration-products/vilep-2000" },
-        ]
-       },
-      { label: "Reverse osmosis products", href: "",
-        children: [
-          { label: "Toyobo reverse osmosis membrane", href: "/product-center/reverse-osmosis-products/toyobo-reverse-osmosis-membrane" },
-        ]
-      },
-      { label: "Application products", href: "" ,
-        children: [
-          { label: "Free Aeration low resistance microporous aerator", href: "/product-center/application-products/free-aeration-low-resistance-microporous-aerator" },
-        ]
-      },
-      { label: "Boiler systems", href: "",
-        children: [
-          { label: "Coal‑fired steam boiler", href: "/product-center/boiler-products/coal-fired-steam-boiler" },
-          { label: "Biomass‑fired steam boiler", href: "/product-center/boiler-products/biomass-fired-steam-boiler" },
-          { label: "Gas & oil‑fired steam boiler", href: "/product-center/boiler-products/gas-oil-fired-steam-boiler" },
-          { label: "Thermal oil heater", href: "/product-center/boiler-products/thermal-oil-heater" },
-          { label: "Fluidized Bed Steam Boilers", href: "/product-center/boiler-products/horizontal-coal-steam-boiler" },
-          { label: "Waste heat recovery steam boiler", href: "/product-center/boiler-products/waste-heat-recovery-steam-boiler" },
-          { label: "Fuel conversion of boiler", href: "/product-center/boiler-products/chain-grate-coal-oil-boiler" },
-          { label: "3‑in‑one combo system", href: "/product-center/boiler-products/three-in-one-combo-system" },
-          { label: "Burners", href: "/product-center/boiler-products/burners" },
-        ]
-      },
-    ],
-  },
-  {
-    label: "Solutions",
-    description: "solutions_desc",
-    href: '/solution/leachate',
-    image: "/sol.jpg",
-    children: [
-      { label: "Leachate treatment", href: "/solution/leachate" },
-      { label: "Municipal & industrial MBR", href: "/solution/municipal-industrial-mbr" },
-      { label: "Softening & heavy metal removal", href: "/solution/softening-heavy-metal" },
-      { label: "  Oilfield reinjection water treatment technology", href: "/solution/difficult-rejection" },
-      { label: "Seawater desalination", href: "/solution/seawater-desalination" },
-      { label: "High‑quality drinking water", href: "/solution/drinking-water" },
-    ],
-  },
-  {
-    label: "Application Cases",
+    label: "Business Cases",
     description: "ac_desc",
-    image: "/cases.jpg",
+    image: "/arc1.jpg",
     href: "/application-cases",
     children: [
-      { label: "Leachate field", href: "/application-cases/leachate-field" },
-      { label: "Municipal sector", href: "/application-cases/municipal-sector" },
-      { label: "Coal chemical & petrochemical", href: "/application-cases/coal-chemical-petrochemical" },
-      { label: "Steel & nonferrous", href: "/application-cases/steel-nonferrous-metals" },
-      { label: "Electronic electroplating", href: "/application-cases/electronic-electroplating-field" },
-      { label: "Printing & dyeing", href: "/application-cases/printing-dyeing-field" },
-      { label: "Seawater desalination field", href: "/application-cases/seawater-desalination-field" },
-      { label: "High-quality drinking water field", href: "/application-cases/drinking-water-field" },
-      { label: "More other areas", href: "/application-cases/more-areas" },
+      { label: "Construction & Engineering", href: "/application-cases/construction-engineering" },
+      { label: "Chemical Supply", href: "/application-cases/chemical-supply" },
+      { label: "Machinery & Equipment", href: "/application-cases/machinery-equipment" },
+      { label: "Architecture & Designs", href: "/application-cases/architecture-designs" },
+      { label: "Import & Export", href: "/application-cases/import-export" },
+      { label: "General Trading", href: "/application-cases/general-trading" },
+      { label: "Sustainability & ESG", href: "/application-cases/sustainability-esg" },
     ],
   },
-  { label: "Join Us", href: "/joining-support" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -126,12 +58,8 @@ export default function Navbar() {
     switch (label) {
       case "Home":
         return t("nav_home");
-      case "Product Center":
-        return t("nav_product_center");
-      case "Solutions":
-        return t("nav_solutions");
-      case "Application Cases":
-        return t("nav_application_cases");
+      case "Business Cases":
+        return t("nav_business_cases");
       case "About Sustonix":
         return t("nav_about");
       case "Join Us":
@@ -154,7 +82,7 @@ export default function Navbar() {
         <div className="flex h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <Image
-              src="/new-logo.jpeg"
+              src="/mewo.jpeg"
               alt="Sustonix logo"
               width={320}
               height={320}
@@ -247,10 +175,10 @@ export default function Navbar() {
           </ul>
           {/* Desktop language switcher */}
           <div className="hidden lg:flex items-center gap-1 ml-2 flex-shrink-0">
-            <button className={`px-2 py-1 rounded text-sm ${lang === "en" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("en")}>
+            {/* <button className={`px-2 py-1 rounded text-sm ${lang === "en" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("en")}>
               EN
-            </button>
-            <button className={`px-2 py-1 rounded text-sm ${lang === "zh" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("zh")}>
+            </button> */}
+            {/* <button className={`px-2 py-1 rounded text-sm ${lang === "zh" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("zh")}>
               中文
             </button>
             <button className={`px-2 py-1 rounded text-sm ${lang === "ru" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("ru")}>
@@ -264,7 +192,7 @@ export default function Navbar() {
             </button>
             <button className={`px-2 py-1 rounded text-sm ${lang === "de" ? "bg-black text-white" : "bg-gray-100 text-gray-800"}`} onClick={() => setLang("de")}>
               DE
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -298,13 +226,11 @@ export default function Navbar() {
                     currentItem?.description ? t(currentItem.description) : ""
                   )}
                 </div>
-                {(activeSubChild?.href || activeChild?.href || currentItem?.label === "Product Center" || currentItem?.label === "Application Cases") && currentItem?.label !== "Contact" && (
+                {(activeSubChild?.href || activeChild?.href || currentItem?.label === "Business Cases") && currentItem?.label !== "Contact" && (
                   <div className="mt-3">
                     <Link
                       href={
-                        currentItem?.label === "Product Center"
-                          ? "/product-center"
-                          : currentItem?.label === "Application Cases"
+                        currentItem?.label === "Business Cases"
                           ? "/application-cases"
                           : activeSubChild?.href || activeChild?.href || ""
                       }
@@ -364,24 +290,20 @@ export default function Navbar() {
                               return t("join_recruitment");
                             case "Contact Us":
                               return t("join_contact");
-                                case "Leachate field":
-                                  return t("ac_leachate");
-                                case "Municipal sector":
-                                  return t("ac_municipal");
-                                case "Coal chemical & petrochemical":
-                                  return t("ac_coal");
-                                case "Steel & nonferrous":
-                                  return t("ac_steel");
-                                case "Electronic electroplating":
-                                  return t("ac_electronic");
-                                case "Printing & dyeing":
-                                  return t("ac_printing");
-                                case "Seawater desalination field":
-                                  return t("ac_seawater");
-                                case "High-quality drinking water field":
-                                  return t("ac_drinking");
-                                case "More other areas":
-                                  return t("ac_more");
+                                case "Construction & Engineering":
+                                  return t("ac_construction");
+                                case "Chemical Supply":
+                                  return t("ac_chemical");
+                                case "Machinery & Equipment":
+                                  return t("ac_machinery");
+                                case "Architecture & Designs":
+                                  return t("ac_architecture");
+                                case "Import & Export":
+                                  return t("ac_import");
+                                case "General Trading":
+                                  return t("ac_trading");
+                                case "Sustainability & ESG":
+                                  return t("ac_sustainability");
                             case "Leachate treatment":
                               return t("sol_leachate");
                             case "Municipal & industrial MBR":
@@ -506,8 +428,8 @@ export default function Navbar() {
                   <Image
                     src={currentItem.image}
                     alt={currentItem.label}
-                    width={currentItem.label === "Product Center" || currentItem.label === "Solution" || currentItem.label ===  "Application Cases" ? 280 : 180}
-                    height={currentItem.label === "Product Center" || currentItem.label === "Solution" || currentItem.label === "Application Cases" ? 180 : 120}
+                    width={currentItem.label === "Business Cases" ? 280 : 180}
+                    height={currentItem.label === "Business Cases" ? 180 : 120}
                     unoptimized
                     className="rounded object-cover"
                   />
@@ -578,24 +500,20 @@ export default function Navbar() {
                                     return t("sol_seawater");
                                   case "High‑quality drinking water":
                                     return t("sol_drinking");
-                                  case "Leachate field":
-                                    return t("ac_leachate");
-                                  case "Municipal sector":
-                                    return t("ac_municipal");
-                                  case "Coal chemical & petrochemical":
-                                    return t("ac_coal");
-                                  case "Steel & nonferrous":
-                                    return t("ac_steel");
-                                  case "Electronic electroplating":
-                                    return t("ac_electronic");
-                                  case "Printing & dyeing":
-                                    return t("ac_printing");
-                                  case "Seawater desalination field":
-                                    return t("ac_seawater");
-                                  case "High-quality drinking water field":
-                                    return t("ac_drinking");
-                                  case "More other areas":
-                                    return t("ac_more");
+                                  case "Construction & Engineering":
+                                    return t("ac_construction");
+                                  case "Chemical Supply":
+                                    return t("ac_chemical");
+                                  case "Machinery & Equipment":
+                                    return t("ac_machinery");
+                                  case "Architecture & Designs":
+                                    return t("ac_architecture");
+                                  case "Import & Export":
+                                    return t("ac_import");
+                                  case "General Trading":
+                                    return t("ac_trading");
+                                  case "Sustainability & ESG":
+                                    return t("ac_sustainability");
                                   default:
                                     return child.label;
                                 }
