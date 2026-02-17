@@ -61,7 +61,7 @@ export default function ChemicalSupplyPage() {
             <h2 className="text-2xl font-bold text-white">{t("ac_chemical")}</h2>
           </div>
           
-          <div className="space-y-3 mb-8">
+          <div className="space-y-3 mb-8 bg-black rounded-lg p-6">
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
               <p className="text-white">{t("ac_chemical_li1")}</p>
@@ -85,6 +85,22 @@ export default function ChemicalSupplyPage() {
             <div className="flex items-start gap-3">
               <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
               <p className="text-white">{t("ac_chemical_li6")}</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-white">{t("ac_chemical_li7")}</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-white">{t("ac_chemical_li8")}</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-white">{t("ac_chemical_li9")}</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-white">{t("ac_chemical_li10")}</p>
             </div>
           </div>
 
