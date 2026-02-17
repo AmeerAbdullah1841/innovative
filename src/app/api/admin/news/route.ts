@@ -84,12 +84,14 @@ async function writeNewsFile(news: NewsArticle[]): Promise<void> {
       // Production: Write to Vercel Blob Storage
       try {
         const jsonContent = JSON.stringify(news, null, 2);
-        const blob = new Blob([jsonContent], { type: 'application/json' });
         
-        // Put will overwrite existing blob with same pathname
-        await put(NEWS_BLOB_PATH, blob, {
+        // Pass string directly; use addRandomSuffix: false to keep a stable path
+        // and allowOverwrite: true so subsequent writes don't throw
+        await put(NEWS_BLOB_PATH, jsonContent, {
           access: 'public',
           contentType: 'application/json',
+          addRandomSuffix: false,
+          allowOverwrite: true,
         });
       } catch (blobError: unknown) {
         const errorMessage = blobError instanceof Error ? blobError.message : 'Unknown error';
