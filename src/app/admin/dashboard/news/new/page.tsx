@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import AdminGuard from "@/components/AdminGuard";
+import { ToastContainer } from "@/components/Toast";
 
 export default function NewNewsPage() {
   const router = useRouter();
@@ -19,6 +20,16 @@ export default function NewNewsPage() {
     featured: false,
   });
   const [previewImage, setPreviewImage] = useState<string>("");
+  const [toasts, setToasts] = useState<Array<{ id: string; message: string; type?: "success" | "error" | "info" }>>([]);
+
+  const addToast = (message: string, type: "success" | "error" | "info" = "success") => {
+    const id = Date.now().toString() + Math.random().toString(36).substring(2, 9);
+    setToasts((prev) => [...prev, { id, message, type }]);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,12 +61,13 @@ export default function NewNewsPage() {
       if (response.ok) {
         setFormData((prev) => ({ ...prev, bannerImage: data.url }));
         setPreviewImage(data.url);
+        addToast("Image uploaded. You can create article.", "success");
       } else {
-        alert(data.error || "Failed to upload image");
+        addToast(data.error || "Failed to upload image", "error");
       }
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Failed to upload image");
+      addToast("Failed to upload image", "error");
     } finally {
       setUploading(false);
     }
@@ -75,14 +87,18 @@ export default function NewNewsPage() {
       });
 
       if (response.ok) {
-        router.push("/admin/dashboard");
+        addToast("New article created", "success");
+        // Wait a moment to show the toast before redirecting
+        setTimeout(() => {
+          router.push("/admin/dashboard");
+        }, 1500);
       } else {
         const data = await response.json();
-        alert(data.error || "Failed to create article");
+        addToast(data.error || "Failed to create article", "error");
       }
     } catch (error) {
       console.error("Error creating article:", error);
-      alert("Failed to create article");
+      addToast("Failed to create article", "error");
     } finally {
       setLoading(false);
     }
@@ -217,14 +233,15 @@ export default function NewNewsPage() {
               </Link>
               <button
                 type="submit"
-                disabled={loading}
-                className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
+                disabled={loading || uploading}
+                className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? "Creating..." : "Create Article"}
+                {loading ? "Creating..." : uploading ? "Uploading..." : "Create Article"}
               </button>
             </div>
           </form>
         </div>
+        <ToastContainer toasts={toasts} onRemove={removeToast} />
       </div>
     </AdminGuard>
   );

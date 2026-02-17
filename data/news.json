@@ -97,5 +97,27 @@
     "featured": false,
     "createdAt": "2026-02-17T15:44:42.131Z",
     "updatedAt": "2026-02-17T15:44:42.131Z"
+  },
+  {
+    "id": "17713466511018z29sk4",
+    "title": "chinese",
+    "excerpt": "shag sbbb",
+    "content": "",
+    "date": "2026-03-06",
+    "bannerImage": "/uploads/news/1771346805541-g3iyr4q0xnu.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T16:44:11.101Z",
+    "updatedAt": "2026-02-17T16:46:52.192Z"
+  },
+  {
+    "id": "17713468959768zz4e4r",
+    "title": "indusrt",
+    "excerpt": "industryyyyyyyy",
+    "content": "",
+    "date": "2026-02-28",
+    "bannerImage": "/uploads/news/1771346882140-431lp1jtdrp.jpg",
+    "featured": false,
+    "createdAt": "2026-02-17T16:48:15.976Z",
+    "updatedAt": "2026-02-17T16:48:15.976Z"
   }
 ]

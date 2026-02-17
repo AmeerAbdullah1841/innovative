@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import AdminGuard from "@/components/AdminGuard";
+import Toast, { ToastContainer } from "@/components/Toast";
 
 interface NewsArticle {
   id: string;
@@ -33,6 +34,7 @@ export default function EditNewsPage() {
     featured: false,
   });
   const [previewImage, setPreviewImage] = useState<string>("");
+  const [toasts, setToasts] = useState<Array<{ id: string; message: string; type?: "success" | "error" | "info" }>>([]);
 
   const fetchArticle = async () => {
     try {
@@ -71,6 +73,15 @@ export default function EditNewsPage() {
     }));
   };
 
+  const addToast = (message: string, type: "success" | "error" | "info" = "success") => {
+    const id = Date.now().toString() + Math.random().toString(36).substring(2, 9);
+    setToasts((prev) => [...prev, { id, message, type }]);
+  };
+
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -90,12 +101,13 @@ export default function EditNewsPage() {
       if (response.ok) {
         setFormData((prev) => ({ ...prev, bannerImage: data.url }));
         setPreviewImage(data.url);
+        addToast("Image uploaded. You can save the changes.", "success");
       } else {
-        alert(data.error || "Failed to upload image");
+        addToast(data.error || "Failed to upload image", "error");
       }
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Failed to upload image");
+      addToast("Failed to upload image", "error");
     } finally {
       setUploading(false);
     }
@@ -115,14 +127,18 @@ export default function EditNewsPage() {
       });
 
       if (response.ok) {
-        router.push("/admin/dashboard");
+        addToast("Changes saved for this article", "success");
+        // Wait a moment to show the toast before redirecting
+        setTimeout(() => {
+          router.push("/admin/dashboard");
+        }, 1500);
       } else {
         const data = await response.json();
-        alert(data.error || "Failed to update article");
+        addToast(data.error || "Failed to update article", "error");
       }
     } catch (error) {
       console.error("Error updating article:", error);
-      alert("Failed to update article");
+      addToast("Failed to update article", "error");
     } finally {
       setSaving(false);
     }
@@ -270,14 +286,15 @@ export default function EditNewsPage() {
               </Link>
               <button
                 type="submit"
-                disabled={saving}
-                className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
+                disabled={saving || uploading}
+                className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {saving ? "Saving..." : "Save Changes"}
+                {saving ? "Saving..." : uploading ? "Uploading..." : "Save Changes"}
               </button>
             </div>
           </form>
         </div>
+        <ToastContainer toasts={toasts} onRemove={removeToast} />
       </div>
     </AdminGuard>
   );
