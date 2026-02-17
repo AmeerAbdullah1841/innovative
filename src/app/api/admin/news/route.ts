@@ -30,22 +30,34 @@ async function readNewsFile(): Promise<NewsArticle[]> {
     if (blobToken && isVercel) {
       // Production: Read from Vercel Blob Storage
       try {
-        // Try to get the blob URL by constructing it
-        // First, try to list and find the blob
+        // Try to list and find the blob
         const blobList = await list({ prefix: 'news/' });
         const newsBlob = blobList.blobs.find(blob => blob.pathname === NEWS_BLOB_PATH);
         
-        if (newsBlob) {
-          const response = await fetch(newsBlob.url);
+        if (newsBlob && newsBlob.url) {
+          const response = await fetch(newsBlob.url, {
+            cache: 'no-store', // Always fetch fresh data
+          });
+          
           if (response.ok) {
             const data = await response.json();
-            return Array.isArray(data) ? data : [];
+            if (Array.isArray(data)) {
+              return data;
+            }
+            // If data is not an array, return empty array
+            console.warn('News data is not an array, returning empty array');
+            return [];
+          } else {
+            console.warn(`Failed to fetch blob: ${response.status} ${response.statusText}`);
+            return [];
           }
         }
+        // Blob doesn't exist yet (first time), return empty array
         return [];
-      } catch (blobError) {
-        console.error('Error reading from blob storage:', blobError);
-        // If blob doesn't exist yet, return empty array (first time)
+      } catch (blobError: unknown) {
+        const errorMessage = blobError instanceof Error ? blobError.message : 'Unknown error';
+        console.error('Error reading from blob storage:', errorMessage, blobError);
+        // If blob doesn't exist yet or error occurs, return empty array
         return [];
       }
     } else {
@@ -56,8 +68,9 @@ async function readNewsFile(): Promise<NewsArticle[]> {
       const fileContent = await readFile(NEWS_FILE_PATH, 'utf-8');
       return JSON.parse(fileContent);
     }
-  } catch (error) {
-    console.error('Error reading news:', error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error reading news:', errorMessage, error);
     return [];
   }
 }
@@ -69,12 +82,20 @@ async function writeNewsFile(news: NewsArticle[]): Promise<void> {
 
     if (blobToken && isVercel) {
       // Production: Write to Vercel Blob Storage
-      const jsonContent = JSON.stringify(news, null, 2);
-      const blob = new Blob([jsonContent], { type: 'application/json' });
-      await put(NEWS_BLOB_PATH, blob, {
-        access: 'public',
-        contentType: 'application/json',
-      });
+      try {
+        const jsonContent = JSON.stringify(news, null, 2);
+        const blob = new Blob([jsonContent], { type: 'application/json' });
+        
+        // Put will overwrite existing blob with same pathname
+        await put(NEWS_BLOB_PATH, blob, {
+          access: 'public',
+          contentType: 'application/json',
+        });
+      } catch (blobError: unknown) {
+        const errorMessage = blobError instanceof Error ? blobError.message : 'Unknown error';
+        console.error('Error writing to blob storage:', errorMessage, blobError);
+        throw new Error(`Failed to write to blob storage: ${errorMessage}`);
+      }
     } else {
       // Development: Write to local file
       const dataDir = join(process.cwd(), 'data');
@@ -83,8 +104,9 @@ async function writeNewsFile(news: NewsArticle[]): Promise<void> {
       }
       await writeFile(NEWS_FILE_PATH, JSON.stringify(news, null, 2), 'utf-8');
     }
-  } catch (error) {
-    console.error('Error writing news:', error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error writing news:', errorMessage, error);
     throw error;
   }
 }
@@ -138,7 +160,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const news = await readNewsFile();
+    // Read existing news
+    let news: NewsArticle[] = [];
+    try {
+      news = await readNewsFile();
+      if (!Array.isArray(news)) {
+        console.warn('News data is not an array, initializing empty array');
+        news = [];
+      }
+    } catch (readError: unknown) {
+      const errorMessage = readError instanceof Error ? readError.message : 'Unknown error';
+      console.error('Error reading news file:', errorMessage);
+      // Continue with empty array if read fails
+      news = [];
+    }
+
     const newArticle: NewsArticle = {
       id: Date.now().toString() + Math.random().toString(36).substring(2, 9),
       title,
@@ -152,7 +188,15 @@ export async function POST(request: NextRequest) {
     };
 
     news.push(newArticle);
-    await writeNewsFile(news);
+    
+    // Write updated news
+    try {
+      await writeNewsFile(news);
+    } catch (writeError: unknown) {
+      const errorMessage = writeError instanceof Error ? writeError.message : 'Unknown error';
+      console.error('Error writing news file:', errorMessage, writeError);
+      throw new Error(`Failed to save article: ${errorMessage}`);
+    }
 
     return NextResponse.json(newArticle, { status: 201 });
   } catch (error: unknown) {
