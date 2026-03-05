@@ -48,7 +48,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/posts/iis-innovative-integrated-solutions_wastewatertreatment-pulpandpaper-etp-activity-7434757210657832960-yksF?utm_source=share&utm_medium=member_ios&rcm=ACoAABDcPaUBLFDAYTvvmNlBi0HinQxjb-k9MGA"
+                href="https://www.linkedin.com/company/iis-innovative-integrated-solutions/posts/?feedView=all"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 hover:text-white transition-colors"

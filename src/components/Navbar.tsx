@@ -187,7 +187,7 @@ export default function Navbar() {
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/posts/iis-innovative-integrated-solutions_wastewatertreatment-pulpandpaper-etp-activity-7434757210657832960-yksF?utm_source=share&utm_medium=member_ios&rcm=ACoAABDcPaUBLFDAYTvvmNlBi0HinQxjb-k9MGA"
+              href="https://www.linkedin.com/company/iis-innovative-integrated-solutions/posts/?feedView=all"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 transition-colors p-1 rounded hover:bg-gray-100"
@@ -633,7 +633,7 @@ export default function Navbar() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/posts/iis-innovative-integrated-solutions_wastewatertreatment-pulpandpaper-etp-activity-7434757210657832960-yksF?utm_source=share&utm_medium=member_ios&rcm=ACoAABDcPaUBLFDAYTvvmNlBi0HinQxjb-k9MGA"
+                href="https://www.linkedin.com/company/iis-innovative-integrated-solutions/posts/?feedView=all"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition-colors p-2 rounded-lg hover:bg-gray-100"
