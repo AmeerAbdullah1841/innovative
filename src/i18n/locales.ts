@@ -269,6 +269,7 @@ export const dictionaries: Record<Lang, Dict> = {
     footer_email: "E-Mail",
     footer_phone: "Telefon",
     footer_address: "Adresse",
+    footer_follow_us: "Folgen Sie uns",
     footer_built_with: "Erstellt mit Next.js",
     footer_rights: "Alle Rechte vorbehalten.",
     home_prod_v100_blurb: "Kompaktes UF-Modul für kleine Systeme und Pilotvalidierung, mit stabilem Durchfluss und einfacher Wartung.",
@@ -766,6 +767,7 @@ export const dictionaries: Record<Lang, Dict> = {
     footer_email: "Email",
     footer_phone: "Phone",
     footer_address: "Address",
+    footer_follow_us: "Follow us",
     footer_built_with: "Built with Next.js",
     footer_rights: "All rights reserved.",
     // Joining Support
@@ -1191,6 +1193,14 @@ export const dictionaries: Record<Lang, Dict> = {
     ac_sustainability_li8: "Sustainable supply chain management",
     ac_sustainability_li9: "Corporate social responsibility programs",
     ac_sustainability_li10: "Climate risk assessment and mitigation",
+    ac_construction_details: "Our construction and engineering practice covers a wide range of projects from residential and industrial buildings to infrastructure such as dams, bridges, and elevated structures. We deliver environmental protection equipment, tanks, vessels, and integrated machinery and technologies. We work with clients from concept through completion, ensuring quality, safety, and compliance with local and international standards.",
+    ac_chemical_details: "We supply industrial and specialty chemicals, petrochemical products, agrochemicals, pharmaceutical intermediates, and related solutions. Our services include chemical storage and handling, safety and compliance support, and sourcing of additives, catalysts, solvents, polymers, and resins. We help clients optimize their supply chain and meet regulatory requirements across markets.",
+    ac_machinery_details: "We provide heavy industrial and manufacturing equipment, construction and agricultural machinery, material handling and packaging systems, and power generation equipment. Our scope includes machinery parts and components, installation and commissioning, and ongoing maintenance and servicing. We support clients with the right equipment and technical support for their operations.",
+    ac_architecture_details: "Our architecture and design services cover residential, commercial, and industrial projects, urban planning, interior and landscape design, and sustainable and green building design. We support renovation and restoration, 3D modeling and visualization, and building code compliance and permits. We help clients realize functional, efficient, and compliant built environments.",
+    ac_import_details: "We support import-export operations with customs clearance and documentation, international shipping and freight forwarding, licensing and permits, and trade compliance. Our services include cross-border payments, supply chain management, warehousing and distribution, trade finance and letters of credit, product sourcing and procurement, and international market entry strategies.",
+    ac_trading_details: "Our general trading activities cover commodity and consumer goods, electronics and technology, textiles and apparel, food and beverage, automotive parts, building materials, and medical equipment. We offer B2B and B2C solutions and trading platform services, helping partners access markets and manage end-to-end trading operations.",
+    ac_sustainability_details: "We help organizations integrate ESG into strategy and operations. Our services include carbon footprint assessment and reduction, renewable energy solutions, waste management and recycling, environmental compliance and auditing, sustainability reporting and disclosure, green building certifications, sustainable supply chain management, corporate responsibility programs, and climate risk assessment and mitigation.",
+    ac_details_heading: "Overview",
     ac_printing_li1: "Textile dyeing wastewater treatment in Jiangsu",
     ac_printing_li2: "Printing industry wastewater treatment in Zhejiang",
     ac_printing_li3: "Fabric dyeing wastewater treatment in Guangdong",
@@ -1585,6 +1595,7 @@ export const dictionaries: Record<Lang, Dict> = {
     footer_email: "Email",
     footer_phone: "Telefono",
     footer_address: "Indirizzo",
+    footer_follow_us: "Seguici",
     footer_built_with: "Realizzato con Next.js",
     footer_rights: "Tutti i diritti riservati.",
     // Home product blurbs (IT)
@@ -2952,6 +2963,7 @@ export const dictionaries: Record<Lang, Dict> = {
     footer_email: "邮箱",
     footer_phone: "电话",
     footer_address: "地址",
+    footer_follow_us: "关注我们",
     footer_built_with: "基于 Next.js 构建",
     footer_rights: "保留所有权利。",
     // Joining Support
@@ -3562,6 +3574,7 @@ export const dictionaries: Record<Lang, Dict> = {
     footer_email: "Email",
     footer_phone: "Телефон",
     footer_address: "Адрес",
+    footer_follow_us: "Подписывайтесь на нас",
     footer_built_with: "Создано на Next.js",
     footer_rights: "Все права защищены.",
     // Boiler specs (RU)
@@ -4285,6 +4298,7 @@ export const dictionaries: Record<Lang, Dict> = {
     footer_email: "Email",
     footer_phone: "Téléphone",
     footer_address: "Adresse",
+    footer_follow_us: "Suivez-nous",
     footer_built_with: "Construit avec Next.js",
     footer_rights: "Tous droits réservés.",
     // Boiler specs (FR)
